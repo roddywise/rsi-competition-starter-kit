@@ -1,6 +1,7 @@
 # Python environments and generated files
 **/.venv/
 **/__pycache__/
+**/.swanlab/
 *.py[cod]
 **/runs/
 

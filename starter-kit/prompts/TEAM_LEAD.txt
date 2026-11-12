@@ -8,4 +8,6 @@
 
 隐藏测试数据和标签不可访问。运行时只用组委会许可的PyTRiO接口，不使用未授权外网。API Key只从受保护的环境变量或平台密钥管理读取，禁止打印、写入仓库或SwanLab参数。
 
+SwanLab项目由队长在个人空间创建并保持私有，在项目“概览-分享”中按用户名添加四位队员为“开发”协作者。每个人用自己的账号执行swanlab login，不共享API Key。各任务本地跑完后，用starter-kit/tools/log_training_report.py记录training.json和history.jsonl；workspace填写项目所有者的SwanLab用户名。
+
 先给我一份文件结构和最小实现计划；每次改文件前说明要改什么，保留官方文件不动，所有实验输出写到新的runs目录。不要编造官方基线、实验分数、模型白名单或资源额度。当前训练包报告是开发参考，平台规则仍待确认。

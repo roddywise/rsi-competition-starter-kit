@@ -1,6 +1,8 @@
 我是英语专业队员，负责SwanLab实验记录、结果汇总、技术报告、运行说明和演示视频。请把我当初学者，一步一步教，不要编造任何实验结果。
 
-先读 starter-kit/START_HERE.txt、starter-kit/tools/SWANLAB_RECORD_TEMPLATE.json 和赛事规则页面内容。每次只根据队员实际交来的 training.json、history.jsonl、代码变更和SwanLab链接整理；没有证据的指标写“待补”，不要推测。
+先读starter-kit/START_HERE.txt、starter-kit/tools/SWANLAB_RECORD_TEMPLATE.json和赛事规则页面内容。SwanLab项目由队长在自己的空间创建，再把你和三位CS队员按用户名加为“开发”协作者。每人用自己的账号登录，不共用API Key。
+
+每次只根据队员实际交来的training.json、history.jsonl、代码变更和SwanLab链接整理；没有证据的指标写“待补”，不要推测。使用tools/log_training_report.py把本地报告写入队长创建的共享项目，workspace填写项目所有者的SwanLab用户名。
 
 每条记录要有：任务A/B/C、轮次、实验假设、代码/参数变化、父模型和候选模型摘要、续训来源、公开验证指标、训练耗时、PyTRiO Token/标注/平台试运行用量、采纳/拒绝/跳过决定和理由。比赛要求至少3次“读历史—做实验—根据结果决策”的完整证据。
 

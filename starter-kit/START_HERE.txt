@@ -23,7 +23,11 @@ CS同学3：打开 tasks\C-engine，阅读该目录的 OPENCODE_PROMPT.txt，负
    python ..\..\tools\inspect_public_data.py --task A --train public\train.jsonl --validation public\validation.jsonl
    把 A 换成自己的任务字母。
 7. 确认测试通过后，双击 RUN_FIRST_ROUND.cmd。它只从随包 checkpoint 续训 2 个 epoch，并写入新的 runs 目录，不覆盖原始包。
-8. 把新目录中的 training.json、history.jsonl、checkpoint 摘要和 SwanLab 记录交给队长及实验记录负责人。
+8. 由队长在自己的 SwanLab 空间创建私有项目，例如 rsi-industrial-evolution。队长在项目“概览-分享”里按 SwanLab 用户名添加四位队员，权限选“开发”，不要只给“查看”。每人用自己的账号执行 swanlab login；API Key 只输在自己的终端里，不能互相转发。项目最多支持10位协作者，够本队使用。
+9. 续训后记录到同一个 SwanLab 项目：
+   python ..\..\tools\log_training_report.py --report runs\A-round-01\training.json --history runs\A-round-01\history.jsonl --project rsi-industrial-evolution --workspace OWNER_USERNAME --hypothesis "本轮假设" --code-change "本轮改动" --decision accepted --decision-reason "依据公开验证指标说明"
+   把 A 和路径换成自己的任务及实际输出。workspace 填项目所有者的 SwanLab 用户名，不是显示昵称。指标变差时填 rejected，不能为了好看改分数。
+10. 把新目录中的 training.json、history.jsonl、checkpoint 摘要和 SwanLab 运行链接交给队长及实验记录负责人。日志脚本只上传训练报告和指标，不上传 API Key。
 
 后续实验从上一轮被选中的 checkpoint 继续。每次使用新的输出目录和 stage-id，并在命令中把 --from-baseline 换成 --resume。没有经过验证的候选模型不要覆盖当前可用模型。
 
