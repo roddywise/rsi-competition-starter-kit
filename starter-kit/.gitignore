@@ -1,0 +1,8 @@
+.venv/
+**/.venv/
+runs/
+**/runs/
+.env
+.env.*
+*.pyc
+__pycache__/

@@ -1,0 +1,19 @@
+# Python environments and generated files
+**/.venv/
+**/__pycache__/
+*.py[cod]
+**/runs/
+
+# Credentials and local secret files
+.env
+.env.*
+*.key
+
+# Generated ZIP duplicates the starter-kit tree; keep it out of Git
+starter-kit-share.zip
+
+# Old planning drafts are not part of the team starter kit
+/01-路线图与任务看板.md
+/02-技术方案.md
+/03-预研任务卡.md
+/04-开队拉人包.md

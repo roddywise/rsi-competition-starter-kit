@@ -1,0 +1,14 @@
+官方 B 训练包问题记录
+
+压缩包版本：cpu-b-rul-20261110-v1.zip
+
+复现方法：在解压后的 B 包目录运行：
+python -m unittest discover -s baselines/tests -v
+
+结果：12 项测试中，10 项通过；以下两项因导入模块缺失而报错：
+test_b_package_delivers_numeric_rul_code_and_weights_without_hidden_data
+test_documented_edition_preserves_trained_code_weights_and_data
+
+两项测试都执行 from scripts.package_baselines import ...，但该压缩包中没有 scripts/ 目录或 scripts/package_baselines.py。训练、预测、checkpoint续训和当前B任务的RUL回归测试通过。
+
+请组委会确认这是预期现象，或提供与测试匹配的完整压缩包。此记录只描述包内缺失文件，不代表隐藏评测失败。不要自行伪造或修改官方模块来掩盖问题。

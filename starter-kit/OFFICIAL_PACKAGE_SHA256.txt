@@ -1,0 +1,4 @@
+Task	Archive	SHA-256	Size
+A-gas	official-A-gas.zip	7a992b92d92c807869c3eccf25b3bf82dcdeba9174e161d6e8b61d82c3ec8851	1133600 bytes
+B-bearing	official-B-bearing.zip	68db6a72c29bac11a4f86e97d9c1f524d35695464fd5f3f6d131f1431bc69d68	3164954 bytes
+C-engine	official-C-engine.zip	6cb8784e2cab7ee93453e756abf54c168721c667ca0c2c1327f5faae96e4211f	7714436 bytes

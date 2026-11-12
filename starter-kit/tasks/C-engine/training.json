@@ -1,0 +1,64 @@
+{
+  "format": "contest.cpu-baseline-report.v1",
+  "profile": "C",
+  "task": "regression",
+  "purpose": "development_reference",
+  "official_scoring_ready": false,
+  "device": "cpu",
+  "cpu_threads_requested": 1,
+  "numpy_version": "1.26.4",
+  "python_version": "3.12.3",
+  "machine": "x86_64",
+  "stage_id": "baseline",
+  "seed": 42,
+  "parameter_count": 833,
+  "input_features": 24,
+  "train_rows": 113089,
+  "validation_rows": 23049,
+  "train_sha256": "sha256:fcfaeaf1e50a0cc01766dfba5fd34c7369f1fe14bf583111837e847865fac281",
+  "validation_sha256": "sha256:0cc747f9998c5d7ee1e4eac6aec0db9f5ed4d2de149a1b1cbe689cce6b6aaca7",
+  "profile_sha256": "sha256:bbdfc7cac9cea81fe578db9ab1e1b398140723bb1c70353d9a9de4544187f4d3",
+  "parent_checkpoint_sha256": null,
+  "checkpoint_sha256": "sha256:98ec6e30e38aee56ca15b7d624a8f412226d46fe97b170667a567601c700bc4e",
+  "initial_steps": 0,
+  "initial_epochs": 0,
+  "final_steps": 6630,
+  "final_epochs": 15,
+  "training_seconds": 4.950366061006207,
+  "learning_rate": 0.002,
+  "batch_size": 256,
+  "validation_before": {
+    "mae": 66.52803374875518,
+    "rmse": 82.37290765050604
+  },
+  "validation_after": {
+    "mae": 38.89982982666355,
+    "rmse": 52.86857256611151
+  },
+  "configuration": {
+    "hidden": 32,
+    "activation": "tanh",
+    "optimizer": "Adam",
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "adam_epsilon": 1e-08,
+    "gradient_clip_norm": 5.0,
+    "feature_clip": [
+      -10.0,
+      10.0
+    ],
+    "normalization": "initial_training_mean_std",
+    "learning_rate": 0.002,
+    "batch_size": 256,
+    "requested_epochs": 15,
+    "classes": []
+  },
+  "source_sha256": {
+    "model.py": "sha256:325026d80747eb36f39c8df1be02b640ae21b3cd082827c66aacbdf273dd61c5",
+    "data.py": "sha256:6099e312829ac3aaf48209ec1f618532c4a8552fedf73f09cf31c8876261db65",
+    "train.py": "sha256:77043a0a944efff434a690fbe4749e9fe5601c38f98e58df116a2ef6ba13ba0a",
+    "predict.py": "sha256:80e6787cd862dfefd85cd6bfcd73b5577dd90e202dd3d5bb9f18a52761807452"
+  },
+  "label_provenance": null,
+  "created_at": "2026-11-08T18:11:18.983397+00:00"
+}

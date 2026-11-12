@@ -1,0 +1,27 @@
+{
+  "dataset": "A|B|C",
+  "stage_id": "A-r01",
+  "hypothesis": "本轮想验证什么",
+  "code_change": "相对上一轮改了什么；没有改代码也要写清楚",
+  "parent_checkpoint_sha256": "",
+  "candidate_checkpoint_sha256": "",
+  "continuation_source": "baseline|accepted_round_id",
+  "training": {
+    "epochs": 2,
+    "learning_rate": null,
+    "batch_size": null,
+    "training_seconds": null
+  },
+  "public_validation_before": {},
+  "public_validation_after": {},
+  "decision": "accepted|rejected|skipped",
+  "decision_reason": "依据公开验证结果和资源成本说明",
+  "resource_usage": {
+    "pytrio_input_tokens": null,
+    "pytrio_output_tokens": null,
+    "label_count": null,
+    "platform_trial_used": false
+  },
+  "swanlab_run_url": "",
+  "created_at": ""
+}

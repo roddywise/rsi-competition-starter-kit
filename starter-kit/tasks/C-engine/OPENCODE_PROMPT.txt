@@ -1,0 +1,9 @@
+我是刚入门的学生，负责官方任务C：NASA C-MAPSS发动机剩余寿命预测。请当我的助教，边讲边做，不要直接替我把项目做完。
+
+先只读当前目录的 START.md、TASK.md、TRAINING_GUIDE.md、training.json、history.jsonl、baselines/configs/C.json 和 baselines/README.md。解释FD001–FD004、输入、标签和指标。输入是3个运行设置加21个传感器特征，共24项；目标是剩余循环数。主指标RMSE，辅助MAE；平台还会报告NASA非对称误差分数，寿命高估惩罚更重。
+
+先用 ../../tools/inspect_public_data.py 检查公开训练/验证数据。训练/验证按整台发动机分组；engine/unit编号、cycle编号和真实寿命不能作为模型输入。meta只用于追溯或分组分析。检查FD001–FD004各自的误差，不要只报一个合并平均值。
+
+先运行包内单元测试，再解释 RUN_FIRST_ROUND.cmd。得到我确认后，从随包checkpoint.npz续训2个epoch，写入新的runs目录，比较训练前后的RMSE和MAE。训练包中的本地训练脚本不计算平台NASA分数；没有官方公式或评测输出时，不要自己猜公式，也不要把自算值叫官方分数。
+
+不要改写或覆盖官方源码、checkpoint和数据。不要访问隐藏测试数据/标签，不要把外部NASA测试标签加入包内数据，不要消耗平台试运行次数，不要调用PyTRiO，除非我明确同意。所有实验都用新目录，保留checkpoint来源和验证记录。本地验证分数不是官方成绩。

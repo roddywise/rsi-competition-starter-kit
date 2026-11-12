@@ -1,0 +1,42 @@
+智训引擎比赛预制菜
+
+这套目录给队伍内部练习使用。tasks 里的官方文件没有改动；source-packages 里保留了组委会下发的原始压缩包。三个任务各自独立，先从对应目录开始。
+
+分工
+队长：打开本目录的 prompts\TEAM_LEAD.txt，负责 Harness、统一流程和整合。
+CS同学1：打开 tasks\A-gas，阅读该目录的 OPENCODE_PROMPT.txt，负责气体识别。
+CS同学2：打开 tasks\B-bearing，阅读该目录的 OPENCODE_PROMPT.txt，负责轴承寿命预测。
+CS同学3：打开 tasks\C-engine，阅读该目录的 OPENCODE_PROMPT.txt，负责发动机寿命预测。
+英语专业同学：打开 prompts\EXPERIMENT_RECORDS.txt，负责 SwanLab 记录、结果整理和文书。
+
+每个 CS 同学的第一轮
+1. 在自己的任务目录打开 OpenCode，把 OPENCODE_PROMPT.txt 内容发给它。
+2. 先让 OpenCode 用中文解释 START.md、TASK.md、TRAINING_GUIDE.md 和 training.json，不要一上来改代码。
+3. 安装 Python 3.10–3.12 和 NumPy 1.26.4。建议在任务目录单独建虚拟环境：
+   py -3.12 -m venv .venv
+   .\.venv\Scripts\activate
+   python -m pip install -r baselines\requirements.txt
+4. 先检查环境版本：
+   python ..\..\tools\check_env.py
+5. 双击自己任务目录里的 RUN_TESTS.cmd。A/C也可在终端运行 python -m unittest discover -s baselines/tests -v。B运行核心测试时用 python run_core_tests.py；要复现缺文件问题再运行 RUN_FULL_TESTS.cmd。
+6. 看公开数据概况：
+   python ..\..\tools\inspect_public_data.py --task A --train public\train.jsonl --validation public\validation.jsonl
+   把 A 换成自己的任务字母。
+7. 确认测试通过后，双击 RUN_FIRST_ROUND.cmd。它只从随包 checkpoint 续训 2 个 epoch，并写入新的 runs 目录，不覆盖原始包。
+8. 把新目录中的 training.json、history.jsonl、checkpoint 摘要和 SwanLab 记录交给队长及实验记录负责人。
+
+后续实验从上一轮被选中的 checkpoint 继续。每次使用新的输出目录和 stage-id，并在命令中把 --from-baseline 换成 --resume。没有经过验证的候选模型不要覆盖当前可用模型。
+
+重要区别
+- 每个数据集各有 10 轮优化；这是系统内部的优化轮次。
+- 后台另有全队共用的 10 次平台试运行。不要拿平台试运行来调试安装、路径或格式。
+- 正式评测当前尚未开放。先把本地训练、日志和镜像流程跑通。
+- 训练包里的工业模型是 CPU NumPy 小模型。PyTRiO 大模型是 Harness 的驱动模型，不是这三个任务的工业模型。
+- 训练包的 training.json 标记为 development_reference / official_scoring_ready=false。包内验证成绩只能作本地参考，不能称为官方基线成绩。
+- 只使用 public/train.jsonl 和 public/validation.jsonl。不要读取、猜测或寻找隐藏测试标签。
+- id 和 meta 只用于追溯或分组分析，不能拼进模型输入。训练/验证的划分规则按各自 TASK.md 执行。
+- B 包的旧 baselines/README.md 有过时的分类说明。B 当前任务以 TASK.md、TRAINING_GUIDE.md 和 configs/B.json 为准，是以分钟为单位的剩余寿命回归。
+- B 压缩包自带的完整测试中有两个打包测试引用了包内缺失的 scripts/package_baselines.py。B 的 RUN_TESTS.cmd 只运行其余现有核心测试；RUN_FULL_TESTS.cmd 用于复现并报告组委会包缺文件问题。不要自行修改官方测试或伪造缺失模块。
+- PyTRiO API Key 不要放在代码、SwanLab配置文件、公开仓库或队群消息里。
+
+平台提交前要准备镜像、源码链接、模型调用信息、SwanLab记录链接和作品文档。后台当前规则仍显示未审核、正式评测未开放；基础模型白名单和旧PDF有差异，最终模型选择以赛委会确认和提交页正式规则为准。

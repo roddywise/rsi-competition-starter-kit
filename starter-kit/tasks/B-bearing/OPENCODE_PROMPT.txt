@@ -1,0 +1,9 @@
+我是刚入门的学生，负责官方任务B：滚动轴承剩余寿命预测。请当我的助教，边讲边做，不要直接替我把项目做完。
+
+先只读当前目录的 START.md、TASK.md、TRAINING_GUIDE.md、training.json、history.jsonl、baselines/configs/B.json 和 baselines/README.md。特别检查版本冲突：当前 TASK.md、TRAINING_GUIDE.md 和 configs/B.json 定义的是RUL回归，目标单位是分钟；旧 baselines/README.md 中把B写成健康状态分类的部分已经过时。不要生成Normal/Degrading/SevereFault标签，也不要加label-provenance参数。
+
+解释输入和目标：水平/垂直振动特征共34项，预测距离最后记录快照的剩余分钟数；主指标RMSE，辅助MAE，越低越好。训练、验证按整根轴承分开。bearing编号、snapshot序号、总寿命和RUL不能当模型输入；meta可用于分组分析，不是特征。
+
+先用 ../../tools/inspect_public_data.py 检查公开训练/验证数据，再运行 RUN_TESTS.cmd。完整测试 RUN_FULL_TESTS.cmd 有两个打包测试会因官方压缩包缺少 scripts/package_baselines.py 而失败；不要修改官方文件来掩盖问题，记录并向队长报告。查看history.jsonl时重点比较验证RMSE，不要只看训练loss；包内曲线已经显示后期验证表现可能变差。之后解释 RUN_FIRST_ROUND.cmd；我确认后，从随包checkpoint.npz续训2个epoch，保存到新runs目录。比较MAE/RMSE，并可按轴承分组检查误差。
+
+不要改写或覆盖官方源码、checkpoint和数据。不要读取隐藏测试数据或标签，不要把原始XJTU网站数据重新混入比赛包，不要消耗平台试运行次数，不要调用PyTRiO，除非我明确同意。每次实验使用新输出目录，并记录父checkpoint、候选checkpoint和验证结果。本地结果不是官方成绩。

@@ -1,0 +1,9 @@
+我是刚入门的学生，负责官方任务A：气体传感器漂移下的六类气体识别。请当我的助教，边讲边做，不要直接替我把项目做完。
+
+先只读当前目录的 START.md、TASK.md、TRAINING_GUIDE.md、training.json、history.jsonl、baselines/configs/A.json 和 baselines/README.md。用简单中文解释：输入是什么、标签是什么、指标是什么、初始checkpoint怎么续训、哪些文件不能动。任务使用128个数值特征预测6类气体，主指标是Macro-F1；训练和验证保留批次/时间顺序。验证集里甲苯样本很少，Macro-F1可能波动，要同时看类别F1和混淆矩阵。
+
+先查看 public/train.jsonl 和 public/validation.jsonl 的结构与类别数量。可以用 ../../tools/inspect_public_data.py。id、meta.source_batch、meta.source_index不能作为模型输入；meta只可用于公开数据的追溯和分组分析。不要随机打乱后重新切分数据。
+
+带我按这个顺序做：先检查Python和NumPy版本，再运行包内单元测试；然后解释 RUN_FIRST_ROUND.cmd 的命令；我确认后，从随包 checkpoint.npz 做2个epoch的本地续训，输出到新的runs目录。比较training.json里的训练前后Macro-F1、Accuracy和类别结果，并教我怎么决定保留还是拒绝候选模型。
+
+不要改写或覆盖官方baselines源码、checkpoint、train/validation文件。所有新代码放到我创建的新文件里，所有新模型放新目录。不要读取隐藏测试数据或标签，不要调用外部数据源重新做标签，不要消耗平台试运行次数，不要调用PyTRiO，除非我明确同意。不要编造结果；本地验证分数不能称为官方成绩。
