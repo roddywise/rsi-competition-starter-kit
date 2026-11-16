@@ -1,7 +1,26 @@
 import argparse
 import json
 import math
+import os
+import sys
 from pathlib import Path
+
+
+def force_utf8_console():
+    """Keep SwanLab's emoji output from breaking a GBK Windows console."""
+    if os.name == "nt":
+        try:
+            import ctypes
+
+            ctypes.windll.kernel32.SetConsoleOutputCP(65001)
+            ctypes.windll.kernel32.SetConsoleCP(65001)
+        except Exception:
+            pass
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
 
 
 def load_json(path):
@@ -33,6 +52,7 @@ def numeric_metrics(prefix, values):
 
 
 def main():
+    force_utf8_console()
     parser = argparse.ArgumentParser(
         description="Log a completed public-data training report and history to SwanLab."
     )
@@ -99,7 +119,7 @@ def main():
     swanlab.init(
         project=args.project,
         workspace=args.workspace,
-        experiment_name=str(report.get("stage_id") or f"{task}-unnamed"),
+        name=str(report.get("stage_id") or f"{task}-unnamed"),
         group=task,
         tags=[f"task-{task}", "public-validation"],
         description=description,
