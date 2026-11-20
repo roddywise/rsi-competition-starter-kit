@@ -1,0 +1,14 @@
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/runs/
+**/swanlog/
+**/.swanlab/
+source-packages/
+tasks/*/public/
+tasks/*/checkpoint.npz
+tasks/*/history.jsonl
+tasks/*/training.json
+tasks/*/baseline-info.json
+tasks/*/PACKAGE_ISSUE_FOR_ORGANIZER.txt
+harness.tar

@@ -2,12 +2,12 @@
 
 先阅读 starter-kit/START_HERE.txt、三个任务包里的 START.md/TASK.md/TRAINING_GUIDE.md，以及赛事规则页面已经确认的信息。先解释系统需要完成的闭环：读历史记录、提出有限的实验动作、从给定checkpoint续训、在允许的公开验证集上比较、保留或回滚、写SwanLab记录。
 
-先做本地可复现的规则化runner，再接PyTRiO模型。不要让大模型直接执行任意Shell、访问任意路径或自行联网。训练工具只允许指定任务、已知公开训练/验证文件、受控超参数、唯一的新输出目录和最多10轮。候选模型必须有父checkpoint摘要、训练报告和验证指标。失败、超预算或验证退化时停止或回退。
+使用平台当前 contest_harness SDK 1.0.4。一个 Harness 镜像支持 A/B/C，通过 train(rnd) 与 predict(sample, model_dir) 接口工作。每轮从 rnd.parent.path() 读取并校验平台父checkpoint；训练只读平台公开投影。rnd.model() 只能选择白名单中的 epochs、learning_rate、batch_size，不得生成或执行代码、Shell、任意路径或网络请求。候选写入唯一的新workspace目录，包含checkpoint和真实训练报告；平台验证指标未严格改善时回滚父模型。
 
-每个任务的训练包各自独立。A/B/C每个任务10轮优化；后台平台试运行是全队共用10次，两者不能混淆。正式评测当前尚未开放。未经我明确同意，不调用PyTRiO、不提交镜像、不运行平台试评。
+A/B/C各有10轮优化；平台最多10次试运行是全队共用额度，两者不能混淆。2026-11-20规则页显示正式评测已开放，但本阶段不启动正式评测。本队只授权离线验收通过后最多3次试运行；逐次检查结果，不盲目重试。
 
 隐藏测试数据和标签不可访问。运行时只用组委会许可的PyTRiO接口，不使用未授权外网。API Key只从受保护的环境变量或平台密钥管理读取，禁止打印、写入仓库或SwanLab参数。
 
 SwanLab项目由队长在个人空间创建并保持私有，在项目“概览-分享”中按用户名添加四位队员为“开发”协作者。每个人用自己的账号执行swanlab login，不共享API Key。各任务本地跑完后，用starter-kit/tools/log_training_report.py记录training.json和history.jsonl；workspace填写项目所有者的SwanLab用户名。
 
-先给我一份文件结构和最小实现计划；每次改文件前说明要改什么，保留官方文件不动，所有实验输出写到新的runs目录。不要编造官方基线、实验分数、模型白名单或资源额度。当前训练包报告是开发参考，平台规则仍待确认。
+保留官方训练包文件不动，离线测试使用模拟宿主，不运行SDK的test_live.py。不要编造官方基线或平台分数。当前提交页列出的基础模型为Qwen/Qwen3.5-4B与Qwen/Qwen3.8-27B；PyTRiO Key只在平台密钥栏输入，禁止写进代码、镜像、仓库或SwanLab。

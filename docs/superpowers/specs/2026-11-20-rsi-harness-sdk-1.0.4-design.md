@@ -1,7 +1,7 @@
 # RSI Harness SDK 1.0.4 接入设计
 
 - 日期：2026-11-20
-- 状态：设计草案，待队长审阅
+- 状态：队长已批准，按规格实施
 - 范围：本地离线 Harness 适配；平台试运行仅作为离线验收后的后续阶段
 
 ## 目标
@@ -44,14 +44,14 @@ starter-kit/
     C-engine/baselines/...
 ```
 
-Docker 构建上下文使用 `starter-kit`，从现有任务目录将 `baselines` 复制到对应的 Python 命名空间。官方文件保持原样，不在运行时动态改写源码。镜像使用 Python 3.12 与 NumPy 1.26.4，以非 root 用户运行；SDK 从已校验的本地归档安装。NumPy 从包索引安装时需要构建环境联网；若构建环境不允许联网，应在后续实现阶段提供经过校验的本地 wheel。首版直接调用 `rnd.model()`，不需要额外的 PyTrIO 客户端或 API Key。
+Docker 构建上下文使用 `starter-kit`，从现有任务目录将 `baselines` 复制到对应的 Python 命名空间。官方文件保持原样，不在运行时动态改写源码。镜像使用 Python 3.12 与 NumPy 1.26.4，以非 root 用户运行；SDK 从已校验的本地归档解压并加入 `PYTHONPATH`。NumPy 从包索引安装时需要构建环境联网；若构建环境不允许联网，应在后续实现阶段提供经过校验的本地 wheel。首版直接调用 `rnd.model()`，不需要额外的 PyTrIO 客户端或 API Key。
 
 ## 训练流程
 
 1. `describe` 声明协议 `contest.harness.workspace.v2`，并声明 `classification` 与 `regression` 两类任务。
 2. `train(rnd)` 根据 `rnd.dataset_key` 选择 A、B 或 C 训练模块；同时校验 `rnd.task` 中的任务类型、主指标和方向。
 3. 从 `rnd.data` / `rnd.task["public_projection"]` 读取平台提供的公开训练与验证路径。梯度训练只使用训练集；验证集只作模型选择；不使用隐藏数据，也不把 `id` 或 `meta` 拼入特征。
-4. 读取 `rnd.history()`，向 `rnd.model()` 发送受限的结构化实验请求。宿主已附加官方提示，选手消息不得重复粘贴官方提示。
+4. 读取 `rnd.history()`，只把历史中的主指标和白名单超参数发送给 `rnd.model()`；不把历史中的自由文本原因或代码送进提示。宿主已附加官方提示，选手消息不得重复粘贴官方提示。
 5. 模型只可从以下白名单选取 `epochs`、`learning_rate`、`batch_size`；首版不接受代码补丁、Shell 命令或路径：
    - A：epochs `{1, 2, 3}`；learning rate `{0.001, 0.003, 0.005}`；batch size `{64, 128, 256}`。
    - B：epochs `{1, 2, 3}`；learning rate `{0.001, 0.003, 0.005}`；batch size `{64, 128, 256}`。

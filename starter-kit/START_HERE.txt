@@ -37,8 +37,10 @@ CS同学3：打开 tasks\C-engine，阅读该目录的 OPENCODE_PROMPT.txt，负
 重要区别
 - 每个数据集各有 10 轮优化；这是系统内部的优化轮次。
 - 后台另有全队共用的 10 次平台试运行。不要拿平台试运行来调试安装、路径或格式。
-- 正式评测当前尚未开放。先把本地训练、日志和镜像流程跑通。
+- 2026-11-20 赛事规则页显示正式评测已开放；本队当前有 0 个提交版本、0 次评测运行。正式评测最多 2 次，但本阶段不启动正式评测。
+- 队长已授权离线 Harness 验收通过后最多使用 3 次平台试运行。试运行会真实调用模型并可能产生费用；每次都要检查结果后再决定是否继续，不能盲目重试。
 - 训练包里的工业模型是 CPU NumPy 小模型。PyTRiO 大模型是 Harness 的驱动模型，不是这三个任务的工业模型。
+- 平台当前 Harness SDK 为 1.0.4。统一入口、离线测试和镜像构建说明见 harness\README.md。模型白名单以提交页当前列出的 Qwen/Qwen3.5-4B 与 Qwen/Qwen3.8-27B 为准。
 - 训练包的 training.json 标记为 development_reference / official_scoring_ready=false。包内验证成绩只能作本地参考，不能称为官方基线成绩。
 - 只使用 public/train.jsonl 和 public/validation.jsonl。不要读取、猜测或寻找隐藏测试标签。
 - id 和 meta 只用于追溯或分组分析，不能拼进模型输入。训练/验证的划分规则按各自 TASK.md 执行。
@@ -46,4 +48,4 @@ CS同学3：打开 tasks\C-engine，阅读该目录的 OPENCODE_PROMPT.txt，负
 - B 压缩包自带的完整测试中有两个打包测试引用了包内缺失的 scripts/package_baselines.py。B 的 RUN_TESTS.cmd 只运行其余现有核心测试；RUN_FULL_TESTS.cmd 用于复现并报告组委会包缺文件问题。不要自行修改官方测试或伪造缺失模块。
 - PyTRiO API Key 不要放在代码、SwanLab配置文件、公开仓库或队群消息里。
 
-平台提交前要准备镜像、源码链接、模型调用信息、SwanLab记录链接和作品文档。后台当前规则仍显示未审核、正式评测未开放；基础模型白名单和旧PDF有差异，最终模型选择以赛委会确认和提交页正式规则为准。
+平台提交前要准备镜像、源码链接、模型调用信息、SwanLab记录链接和作品文档。当前 Harness 仍须先完成本地 SDK 离线验收；没有 Docker 环境时不要上传镜像。平台试运行与正式评测额度分开，API Key 只在平台密钥栏填写。
