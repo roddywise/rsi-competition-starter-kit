@@ -1,4 +1,5 @@
 # Python environments and generated files
+.worktrees/
 **/.venv/
 **/__pycache__/
 **/.swanlab/
