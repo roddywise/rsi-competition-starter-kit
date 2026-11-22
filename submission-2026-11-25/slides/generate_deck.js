@@ -302,7 +302,7 @@ async function main() {
           <div class="status" style="flex:1;"><p><b>实际 Token：</b>输入 34,517，输出 7,680，合计 42,197；平台显示“已结算”。报告未展示具体金额。</p></div>
         </div>
         <div class="row">
-          <div class="listbox" style="flex:1;"><ul><li>平台沙箱规格：2 核 CPU、4 GiB 内存。</li><li>C 的 CPU 用时最高，是资源优化重点。</li><li>试运行已用 1/10；正式评测 0/3。</li></ul></div>
+          <div class="listbox" style="flex:1;"><ul><li>平台沙箱规格：2 核 CPU、4 GiB 内存。</li><li>C 的 CPU 用时最高，是资源优化重点。</li><li>试运行 1/10；正式评测 1/3。</li></ul></div>
         </div>`
       )
     ),
@@ -312,11 +312,11 @@ async function main() {
       "slide-09-delivery.html",
       page(
         "交付边界与当前风险",
-        "代码、镜像、平台校验和首次试运行已完成；正式评测未启动。",
+        "代码、镜像、平台校验、首次试运行和正式版本选择已完成；正式评测已入队。",
         "09",
         `<div class="row">
           <div class="card" style="flex:1;"><p class="tag">已完成</p><h3>端到端跑通</h3><p>SDK 1.0.4；镜像 40.2 MB；单镜像 A/B/C；漂移报告与回滚；试运行 1/10 完成，42,197 Token。</p><p class="small">Harness 17 项；SDK 离线 18 项；A/C 各9、B核心10项通过。</p></div>
-          <div class="card accent" style="flex:1;"><p class="tag">待决策</p><h3>正式版本与正式评测</h3><p>v1 尚未选为正式版本；正式评测 0/3，未启动。</p><p class="small">隐藏测试试运行指标不全等于正式成绩；需先复核报告。</p></div>
+          <div class="card accent" style="flex:1;"><p class="tag">进行中</p><h3>第 1 次正式评测</h3><p>v1 已选为正式版本并锁定；正式评测 1/3，当前排队。</p><p class="small">正式成绩待公布，不能与试运行指标混用。</p></div>
         </div>
         <div class="listbox"><h3 style="font-size:12pt;color:${C.navy};margin:0 0 5pt;">当前不能声称的事</h3>
           <ul><li>尚未获得正式评测成绩或排名。</li><li>源码仓库与 SwanLab 仍为私有，评委访问权限未配置。</li><li>B 官方包的两项打包测试依赖缺失脚本，训练核心测试仍通过。</li><li>试运行只覆盖一次提交版本，不代表 10 轮以外仍稳定。</li></ul>
@@ -336,11 +336,11 @@ async function main() {
           <p class="arrow">→</p>
           <div class="flow-card"><h3>2 · 修正访问权限</h3><p>源码仓库与 SwanLab 需对评委可访问。</p><p>否则链接无效。</p></div>
           <p class="arrow">→</p>
-          <div class="flow-card"><h3>3 · 选正式版本</h3><p>队长确认后，把 v1 选为正式版本。</p><p>正式评测 0/3，另行授权。</p></div>
+          <div class="flow-card"><h3>3 · 选正式版本</h3><p>v1 已选为正式版本。</p><p>第 1 次正式评测已入队，1/3。</p></div>
           <p class="arrow">→</p>
           <div class="flow-card"><h3>4 · 更新材料</h3><p>把正式成绩、用量与异常补进报告和 PPT。</p><p>不把试运行写成正式成绩。</p></div>
         </div>
-        <div class="status"><p>截至 2026-11-22：v1 校验通过；试运行 1/10，A/B/C 完成；Token 42,197；正式评测 0/3。</p></div>`
+        <div class="status"><p>截至 2026-11-22：v1 已选正式版本；试运行 1/10；正式评测 1/3（第 1 次已入队，成绩待公布）；Token 42,197。</p></div>`
       )
     ),
   });
