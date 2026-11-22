@@ -2,7 +2,7 @@
 
 **版本：开发验证稿（2026-11-22）**  
 **目标协议：`contest.harness.workspace.v2` / contest_harness SDK 1.0.4**  
-**重要状态：Python 离线验收、容器 describe/predict/train 冒烟测试、镜像构建与 docker save 已完成；平台提交与试运行尚未执行。**
+**重要状态：Python 离线验收、容器 describe/predict/train 冒烟测试、镜像构建与 docker save 已完成；平台镜像已可用，提交版本 v1 校验通过，第 1 次试运行已完成。**
 
 ## 1. 运行环境
 
@@ -83,4 +83,4 @@ SDK 离线测试在 Windows 需设置 `PYTHONUTF8=1`、`PYTHONIOENCODING=utf-8`�
 
 API Key 只由队长在平台安全输入；不写入镜像、仓库、日志、SwanLab 或本说明。平台试运行会真实调用模型并可能产生费用；本队授权上限为 3 次，必须逐次检查结果。正式评测不在本阶段启动。当前已完成的 SwanLab 记录是本地公开数据开发参考，不是 PyTrIO 微调记录或平台正式成绩。
 
-?????????????? 0???? 0/10????? 0/2??????????? `Qwen/Qwen3.8-27B`??? `harness.tar`????????????????????? PyTRiO Key ?????????????????????????
+平台第 1 次试运行（v1，Qwen/Qwen3.8-27B）已完成：A/B/C 均完成 10/10 轮训练与隐藏测试预测；输入 34,517 Token，输出 7,680 Token，合计 42,197 Token，平台显示已结算。试运行 1/10，正式评测 0/3。以上为试运行指标，不是正式成绩。

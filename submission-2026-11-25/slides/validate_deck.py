@@ -26,10 +26,8 @@ for slide in presentation.slides:
             )
 text = "\n".join(text_items)
 required = (
-    "训练前",
-    "训练后",
-    "0.7140",
-    "656.35",
+    "0.8642",
+    "691.66",
     "Median PSI",
     "118",
     "40.2",

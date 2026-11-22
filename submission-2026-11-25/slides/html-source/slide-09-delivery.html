@@ -45,13 +45,13 @@ li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
 </style></head><body>
     <div class="page">
       <div class="top"><p class="brand">RSI · 智训引擎</p><p class="page-no">09 / 10</p></div>
-      <div><h1 class="title">交付边界与当前风险</h1><p class="subtitle">代码、容器协议和镜像已验收；平台版本尚未创建。</p></div>
+      <div><h1 class="title">交付边界与当前风险</h1><p class="subtitle">代码、镜像、平台校验和首次试运行已完成；正式评测未启动。</p></div>
       <div class="content"><div class="row">
-          <div class="card" style="flex:1;"><p class="tag">已完成</p><h3>SDK 1.0.4 + 镜像</h3><p>describe/train/predict；单镜像 A/B/C；漂移报告、自动回滚；docker save 40.2 MB。</p><p class="small">Harness 17 项；SDK 官方离线 18 项；A/C 各9、B核心10项通过。</p></div>
-          <div class="card accent" style="flex:1;"><p class="tag">待执行</p><h3>平台提交与试运行</h3><p>尚未创建提交版本，尚未上传镜像或填写 PyTRiO Key。</p><p class="small">真实宿主兼容性、无人值守运行和费用需试运行验证。</p></div>
+          <div class="card" style="flex:1;"><p class="tag">已完成</p><h3>端到端跑通</h3><p>SDK 1.0.4；镜像 40.2 MB；单镜像 A/B/C；漂移报告与回滚；试运行 1/10 完成，42,197 Token。</p><p class="small">Harness 17 项；SDK 离线 18 项；A/C 各9、B核心10项通过。</p></div>
+          <div class="card accent" style="flex:1;"><p class="tag">待决策</p><h3>正式版本与正式评测</h3><p>v1 尚未选为正式版本；正式评测 0/3，未启动。</p><p class="small">隐藏测试试运行指标不全等于正式成绩；需先复核报告。</p></div>
         </div>
-        <div class="listbox"><h3 style="font-size:12pt;color:#173247;margin:0 0 5pt;">不能冒充已完成的事项</h3>
-          <ul><li>没有创建平台提交版本，也没有消耗任何试运行额度（0/10）。</li><li>正式评测保持 0/2，尚未启动。</li><li>三条 SwanLab 记录是本地公开数据续训，不是完整 PyTrio 微调/平台评测记录。</li><li>B 官方包的两项打包测试依赖缺失脚本，训练核心测试仍通过。</li></ul>
+        <div class="listbox"><h3 style="font-size:12pt;color:#173247;margin:0 0 5pt;">当前不能声称的事</h3>
+          <ul><li>尚未获得正式评测成绩或排名。</li><li>源码仓库与 SwanLab 仍为私有，评委访问权限未配置。</li><li>B 官方包的两项打包测试依赖缺失脚本，训练核心测试仍通过。</li><li>试运行只覆盖一次提交版本，不代表 10 轮以外仍稳定。</li></ul>
         </div></div>
       <div class="footer"><p>公开数据本地开发参考 · 非平台正式评分</p></div>
     </div></body></html>

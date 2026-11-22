@@ -45,17 +45,17 @@ li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
 </style></head><body>
     <div class="page">
       <div class="top"><p class="brand">RSI · 智训引擎</p><p class="page-no">08 / 10</p></div>
-      <div><h1 class="title">资源与费用：本地很轻，云端尚未测量</h1><p class="subtitle">本地 CPU 数据只用于开发验证；本项目目前没有真实 PyTrio 模型调用。</p></div>
+      <div><h1 class="title">资源与费用：本地很轻，云端已实测</h1><p class="subtitle">第 1 次试运行实际用量 42,197 Token；A/B/C 并行执行。</p></div>
       <div class="content"><div class="row">
-          <div class="card" style="flex:1;"><p class="tag">A</p><h3>2 epochs</h3><p class="big">&lt;0.01 s</p><p class="small">training.json 计时精度为 0.0 秒</p></div>
-          <div class="card" style="flex:1;"><p class="tag">B</p><h3>2 epochs</h3><p class="big">0.031 s</p><p class="small">Python 3.12 / NumPy 1.26.4</p></div>
-          <div class="card" style="flex:1;"><p class="tag">C</p><h3>2 epochs</h3><p class="big">0.485 s</p><p class="small">本机计时，不能外推平台容器</p></div>
+          <div class="card" style="flex:1;"><p class="tag">A</p><h3>运行 2,790 s</h3><p class="big">CPU 3,508 s</p><p class="small">4,886 条隐藏样本</p></div>
+          <div class="card" style="flex:1;"><p class="tag">B</p><h3>运行 1,617 s</h3><p class="big">CPU 1,799 s</p><p class="small">200 条隐藏样本</p></div>
+          <div class="card" style="flex:1;"><p class="tag">C</p><h3>运行 12,733 s</h3><p class="big">CPU 19,729 s</p><p class="small">9,687 条隐藏样本</p></div>
         </div>
         <div class="row">
-          <div class="status" style="flex:1;"><p><b>PyTrio 调用 / Token / 费用：</b>当前 Harness 0 次、0 Token；没有云端试运行账单数据。平台试运行可计费，队长授权上限为 3 次，需逐次检查。</p></div>
+          <div class="status" style="flex:1;"><p><b>实际 Token：</b>输入 34,517，输出 7,680，合计 42,197；平台显示“已结算”。报告未展示具体金额。</p></div>
         </div>
         <div class="row">
-          <div class="listbox" style="flex:1;"><ul><li>本地训练仅用 CPU，不调用 PyTrio。</li><li>平台沙箱规格：2 核 CPU、4 GiB 内存。</li><li>实际模型调用量和费用待第一轮平台运行测量。</li></ul></div>
+          <div class="listbox" style="flex:1;"><ul><li>平台沙箱规格：2 核 CPU、4 GiB 内存。</li><li>C 的 CPU 用时最高，是资源优化重点。</li><li>试运行已用 1/10；正式评测 0/3。</li></ul></div>
         </div></div>
       <div class="footer"><p>公开数据本地开发参考 · 非平台正式评分</p></div>
     </div></body></html>

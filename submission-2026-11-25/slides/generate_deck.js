@@ -187,45 +187,41 @@ async function main() {
     html: writeSlide(
       "slide-05-results.html",
       page(
-        "第一轮本地结果：总体小幅改善，不能替代平台评分",
-        "NumPy 1.26.4；每项从官方 checkpoint 续训 2 epochs；只用公开验证集。",
+        "平台试运行：A 明显改善，B/C 接近本地",
+        "提交版本 v1 · Qwen/Qwen3.8-27B · 每任务 10/10 轮 · 试运行不计分",
         "05",
         `<div class="matrix">
            <div class="mrow mhead">
-             <div class="mcell" style="flex:0.6;"><p>任务</p></div>
-             <div class="mcell" style="flex:1.4;"><p>训练前</p></div>
-             <div class="mcell" style="flex:1.4;"><p>训练后</p></div>
-             <div class="mcell" style="flex:1.3;"><p>变化</p></div>
-             <div class="mcell" style="flex:0.9;"><p>记录</p></div>
+             <div class="mcell" style="flex:0.5;"><p>任务</p></div>
+             <div class="mcell" style="flex:2.2;"><p>隐藏测试指标</p></div>
+             <div class="mcell" style="flex:0.8;"><p>样本</p></div>
+             <div class="mcell" style="flex:1.0;"><p>最终采用</p></div>
            </div>
            <div class="mrow">
-             <div class="mcell" style="flex:0.6;"><p>A</p></div>
-             <div class="mcell" style="flex:1.4;"><p>Macro-F1 0.7140<br>Acc 0.8786</p></div>
-             <div class="mcell" style="flex:1.4;"><p>Macro-F1 0.7166<br>Acc 0.8826</p></div>
-             <div class="mcell" style="flex:1.3;"><p>+0.0026 F1</p></div>
-             <div class="mcell" style="flex:0.9;"><p>A-round-01</p></div>
+             <div class="mcell" style="flex:0.5;"><p>A</p></div>
+             <div class="mcell" style="flex:2.2;"><p>Accuracy 0.8690<br>Macro-F1 0.8642</p></div>
+             <div class="mcell" style="flex:0.8;"><p>4,886</p></div>
+             <div class="mcell" style="flex:1.0;"><p>第 10 轮</p></div>
            </div>
            <div class="mrow">
-             <div class="mcell" style="flex:0.6;"><p>B</p></div>
-             <div class="mcell" style="flex:1.4;"><p>RMSE 681.16 分钟<br>MAE 563.11</p></div>
-             <div class="mcell" style="flex:1.4;"><p>RMSE 656.35 分钟<br>MAE 545.86</p></div>
-             <div class="mcell" style="flex:1.3;"><p>−24.81 分钟<br>−3.6%</p></div>
-             <div class="mcell" style="flex:0.9;"><p>B-round-01</p></div>
+             <div class="mcell" style="flex:0.5;"><p>B</p></div>
+             <div class="mcell" style="flex:2.2;"><p>MAE 503.61 分钟<br>RMSE 691.66 分钟</p></div>
+             <div class="mcell" style="flex:0.8;"><p>200</p></div>
+             <div class="mcell" style="flex:1.0;"><p>第 2 轮</p></div>
            </div>
            <div class="mrow">
-             <div class="mcell" style="flex:0.6;"><p>C</p></div>
-             <div class="mcell" style="flex:1.4;"><p>RMSE 52.87 cycles<br>MAE 38.90</p></div>
-             <div class="mcell" style="flex:1.4;"><p>RMSE 52.74 cycles<br>MAE 38.99</p></div>
-             <div class="mcell" style="flex:1.3;"><p>−0.13 RMSE<br>+0.09 MAE</p></div>
-             <div class="mcell" style="flex:0.9;"><p>C-round-01</p></div>
+             <div class="mcell" style="flex:0.5;"><p>C</p></div>
+             <div class="mcell" style="flex:2.2;"><p>MAE 41.51 循环 · RMSE 56.22 循环<br>NASA 分 4.86×10¹⁰</p></div>
+             <div class="mcell" style="flex:0.8;"><p>9,687</p></div>
+             <div class="mcell" style="flex:1.0;"><p>第 1 轮</p></div>
            </div>
          </div>
          <div class="row">
-           <div class="card" style="flex:1;"><p class="tag">A</p><h3>Macro-F1</h3><p class="big">+0.0026</p><p class="small">0.7140 → 0.7166</p></div>
-           <div class="card accent" style="flex:1;"><p class="tag">B</p><h3>RMSE</h3><p class="big">−3.6%</p><p class="small">681.16 → 656.35 分钟</p></div>
-           <div class="card" style="flex:1;"><p class="tag">C</p><h3>RMSE / MAE</h3><p class="big">−0.13 / +0.09</p><p class="small">52.87 → 52.74 cycles；MAE 变差</p></div>
+           <div class="card" style="flex:1;"><p class="tag">A</p><h3>Macro-F1</h3><p class="big">0.8642</p><p class="small">本地公开验证 0.7166</p></div>
+           <div class="card accent" style="flex:1;"><p class="tag">B</p><h3>RMSE</h3><p class="big">691.66</p><p class="small">分钟；本地 656.35</p></div>
+           <div class="card" style="flex:1;"><p class="tag">C</p><h3>RMSE</h3><p class="big">56.22</p><p class="small">循环；本地 52.74</p></div>
          </div>
-         <p class="small">本页数字为本地开发报告值，字段 official_scoring_ready=false；不得称为官方成绩。</p>`
+         <p class="small">平台真实隐藏测试指标，不是正式成绩。Token 42,197；运行约 A 46.5 / B 26.9 / C 212.2 分钟。</p>`
        )
       ),
     });
@@ -294,19 +290,19 @@ async function main() {
     html: writeSlide(
       "slide-08-resources.html",
       page(
-        "资源与费用：本地很轻，云端尚未测量",
-        "本地 CPU 数据只用于开发验证；本项目目前没有真实 PyTrio 模型调用。",
+        "资源与费用：本地很轻，云端已实测",
+        "第 1 次试运行实际用量 42,197 Token；A/B/C 并行执行。",
         "08",
         `<div class="row">
-          <div class="card" style="flex:1;"><p class="tag">A</p><h3>2 epochs</h3><p class="big">&lt;0.01 s</p><p class="small">training.json 计时精度为 0.0 秒</p></div>
-          <div class="card" style="flex:1;"><p class="tag">B</p><h3>2 epochs</h3><p class="big">0.031 s</p><p class="small">Python 3.12 / NumPy 1.26.4</p></div>
-          <div class="card" style="flex:1;"><p class="tag">C</p><h3>2 epochs</h3><p class="big">0.485 s</p><p class="small">本机计时，不能外推平台容器</p></div>
+          <div class="card" style="flex:1;"><p class="tag">A</p><h3>运行 2,790 s</h3><p class="big">CPU 3,508 s</p><p class="small">4,886 条隐藏样本</p></div>
+          <div class="card" style="flex:1;"><p class="tag">B</p><h3>运行 1,617 s</h3><p class="big">CPU 1,799 s</p><p class="small">200 条隐藏样本</p></div>
+          <div class="card" style="flex:1;"><p class="tag">C</p><h3>运行 12,733 s</h3><p class="big">CPU 19,729 s</p><p class="small">9,687 条隐藏样本</p></div>
         </div>
         <div class="row">
-          <div class="status" style="flex:1;"><p><b>PyTrio 调用 / Token / 费用：</b>当前 Harness 0 次、0 Token；没有云端试运行账单数据。平台试运行可计费，队长授权上限为 3 次，需逐次检查。</p></div>
+          <div class="status" style="flex:1;"><p><b>实际 Token：</b>输入 34,517，输出 7,680，合计 42,197；平台显示“已结算”。报告未展示具体金额。</p></div>
         </div>
         <div class="row">
-          <div class="listbox" style="flex:1;"><ul><li>本地训练仅用 CPU，不调用 PyTrio。</li><li>平台沙箱规格：2 核 CPU、4 GiB 内存。</li><li>实际模型调用量和费用待第一轮平台运行测量。</li></ul></div>
+          <div class="listbox" style="flex:1;"><ul><li>平台沙箱规格：2 核 CPU、4 GiB 内存。</li><li>C 的 CPU 用时最高，是资源优化重点。</li><li>试运行已用 1/10；正式评测 0/3。</li></ul></div>
         </div>`
       )
     ),
@@ -316,14 +312,14 @@ async function main() {
       "slide-09-delivery.html",
       page(
         "交付边界与当前风险",
-        "代码、容器协议和镜像已验收；平台版本尚未创建。",
+        "代码、镜像、平台校验和首次试运行已完成；正式评测未启动。",
         "09",
         `<div class="row">
-          <div class="card" style="flex:1;"><p class="tag">已完成</p><h3>SDK 1.0.4 + 镜像</h3><p>describe/train/predict；单镜像 A/B/C；漂移报告、自动回滚；docker save 40.2 MB。</p><p class="small">Harness 17 项；SDK 官方离线 18 项；A/C 各9、B核心10项通过。</p></div>
-          <div class="card accent" style="flex:1;"><p class="tag">待执行</p><h3>平台提交与试运行</h3><p>尚未创建提交版本，尚未上传镜像或填写 PyTRiO Key。</p><p class="small">真实宿主兼容性、无人值守运行和费用需试运行验证。</p></div>
+          <div class="card" style="flex:1;"><p class="tag">已完成</p><h3>端到端跑通</h3><p>SDK 1.0.4；镜像 40.2 MB；单镜像 A/B/C；漂移报告与回滚；试运行 1/10 完成，42,197 Token。</p><p class="small">Harness 17 项；SDK 离线 18 项；A/C 各9、B核心10项通过。</p></div>
+          <div class="card accent" style="flex:1;"><p class="tag">待决策</p><h3>正式版本与正式评测</h3><p>v1 尚未选为正式版本；正式评测 0/3，未启动。</p><p class="small">隐藏测试试运行指标不全等于正式成绩；需先复核报告。</p></div>
         </div>
-        <div class="listbox"><h3 style="font-size:12pt;color:${C.navy};margin:0 0 5pt;">不能冒充已完成的事项</h3>
-          <ul><li>没有创建平台提交版本，也没有消耗任何试运行额度（0/10）。</li><li>正式评测保持 0/2，尚未启动。</li><li>三条 SwanLab 记录是本地公开数据续训，不是完整 PyTrio 微调/平台评测记录。</li><li>B 官方包的两项打包测试依赖缺失脚本，训练核心测试仍通过。</li></ul>
+        <div class="listbox"><h3 style="font-size:12pt;color:${C.navy};margin:0 0 5pt;">当前不能声称的事</h3>
+          <ul><li>尚未获得正式评测成绩或排名。</li><li>源码仓库与 SwanLab 仍为私有，评委访问权限未配置。</li><li>B 官方包的两项打包测试依赖缺失脚本，训练核心测试仍通过。</li><li>试运行只覆盖一次提交版本，不代表 10 轮以外仍稳定。</li></ul>
         </div>`
       )
     ),
@@ -332,19 +328,19 @@ async function main() {
     html: writeSlide(
       "slide-10-next.html",
       page(
-        "下一步：创建平台版本，完成一次受控试运行",
-        "正式评测仍不启动；先确认镜像可用与真实宿主兼容性。",
+        "下一步：复核报告，决定正式版本与正式评测",
+        "试运行已完成；正式评测需要新的明确授权。",
         "10",
         `<div class="flow" style="flex:1;align-items:center;">
-          <div class="flow-card"><h3>1 · 上传镜像</h3><p>提交页上传 harness.tar（40.2 MB）。</p><p>等待状态变为“镜像可用”。</p></div>
+          <div class="flow-card"><h3>1 · 复核报告</h3><p>核对 A/B/C 隐藏指标、10 轮记录和 Token。</p><p>确认异常与可复现性。</p></div>
           <p class="arrow">→</p>
-          <div class="flow-card"><h3>2 · 保存版本</h3><p>选择 Qwen/Qwen3.8-27B；填写记录与源码链接；队长输入 Key。</p></div>
+          <div class="flow-card"><h3>2 · 修正访问权限</h3><p>源码仓库与 SwanLab 需对评委可访问。</p><p>否则链接无效。</p></div>
           <p class="arrow">→</p>
-          <div class="flow-card"><h3>3 · 首次试运行</h3><p>核对一次运行覆盖任务、轮数与费用。</p><p>最多 3 次；逐次复核。</p></div>
+          <div class="flow-card"><h3>3 · 选正式版本</h3><p>队长确认后，把 v1 选为正式版本。</p><p>正式评测 0/3，另行授权。</p></div>
           <p class="arrow">→</p>
-          <div class="flow-card"><h3>4 · 补齐材料</h3><p>云端完整实验记录、运行复现与最终成绩。</p><p>未实测内容不写成结果。</p></div>
+          <div class="flow-card"><h3>4 · 更新材料</h3><p>把正式成绩、用量与异常补进报告和 PPT。</p><p>不把试运行写成正式成绩。</p></div>
         </div>
-        <div class="status"><p>截至 2026-11-22：镜像 tar 已生成；提交版本 0；试运行 0/10；正式评测 0/2。</p></div>`
+        <div class="status"><p>截至 2026-11-22：v1 校验通过；试运行 1/10，A/B/C 完成；Token 42,197；正式评测 0/3。</p></div>`
       )
     ),
   });
