@@ -4,8 +4,8 @@ Harness 镜像清单（2026-11-22）
 镜像标签：rsi-harness:1.0.4
 平台：linux/amd64
 基础镜像：python:3.12-alpine3.20
-大小：40,240,640 字节（约 38.4 MiB）
-SHA-256：8ec57f8066af2b9cdab7b616079719afa22663d515108dbc2e03c61d696c6ed5
+大小：40,233,984 字节（约 38.4 MiB）
+SHA-256：08441d807fafacff8cd193e1ec5139bd6a751802e58954292b66bfd92c67036f
 导出方式：docker save
 
 容器内已验证：

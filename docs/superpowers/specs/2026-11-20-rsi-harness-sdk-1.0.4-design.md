@@ -20,7 +20,7 @@
 - 续训必须使用 `rnd.parent.path()` 读取并校验本轮平台父检查点。模型调用由 `rnd.model()` 通过宿主完成，API Key 不进入镜像、仓库或训练记录。
 - SDK 1.0.4 压缩包 SHA-256 已校验为 `7afd282d6b5fd889d64d0515a67d169806970e36200689b18d2040026167a4af`。
 - 管理员公告写产物总量不超过 64 MiB；SDK 1.0.4 文档描述更大的分块上传上限。此材料存在不一致，首版候选额外限制在 64 MiB 内，并服从运行时 `rnd.limits`。
-- 本机 Docker Desktop 4.99 已可用；已构建并验证 `rsi-harness:1.0.4`（linux/amd64，Alpine 3.20），`docker save` 归档 40,240,640 字节。平台导入与试运行尚未执行。
+- 本机 Docker Desktop 4.99 已可用；已构建并验证 `rsi-harness:1.0.4`（linux/amd64，Alpine 3.20），`docker save` 归档 40,233,984 字节。平台导入与试运行尚未执行。
 
 ## 方案
 

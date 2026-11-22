@@ -80,7 +80,7 @@
 - 模型只返回受限 JSON 超参数；不执行代码、Shell、任意路径或网络请求。
 - 候选必须绑定本轮父 checkpoint 摘要；平台验证未严格改善则回滚。
 - 产物额外限制在 64 MiB，直到管理员公告与 SDK 1.0.4 的更高分块上传限制差异得到确认。
-- 镜像已在本机 Docker Desktop 中构建为 `rsi-harness:1.0.4`（linux/amd64，Alpine 3.20），`docker save` 归档 40,240,640 字节；容器内 `describe`、A/B/C 预测和模拟宿主训练协议均通过。
+- 镜像已在本机 Docker Desktop 中构建为 `rsi-harness:1.0.4`（linux/amd64，Alpine 3.20），`docker save` 归档 40,233,984 字节；容器内 `describe`、A/B/C 预测和模拟宿主训练协议均通过。
 - 平台提交版本、真实宿主兼容性和试运行仍未执行；容器隔离与无人值守运行尚未获得平台实测证据。
 
 ## 8. 待完成项

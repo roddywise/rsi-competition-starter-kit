@@ -21,7 +21,7 @@ docker build --platform linux/amd64 -f .\harness\Dockerfile -t rsi-harness:1.0.4
 docker save -o harness.tar rsi-harness:1.0.4
 ```
 
-平台只接受 `docker save` 导出的单个 Linux/amd64 未压缩 tar 镜像；不能用源码 ZIP、Dockerfile 或 `docker export` 代替。当前导出文件为 `harness.tar`，40,240,640 字节（约 38.4 MiB），低于 50 MB 门槛，可直接上传。SHA-256：`8ec57f8066af2b9cdab7b616079719afa22663d515108dbc2e03c61d696c6ed5`。
+平台只接受 `docker save` 导出的单个 Linux/amd64 未压缩 tar 镜像；不能用源码 ZIP、Dockerfile 或 `docker export` 代替。当前导出文件为 `harness.tar`，40,233,984 字节（约 38.4 MiB），低于 50 MB 门槛，可直接上传。SHA-256：`08441d807fafacff8cd193e1ec5139bd6a751802e58954292b66bfd92c67036f`。
 
 镜像基于 `python:3.12-alpine3.20`，已在本机 Docker Desktop 中完成构建、`describe`、A/B/C 预测和模拟宿主完整训练协议验证。平台提交版本尚未创建，真实宿主兼容性与试运行仍待执行。
 
