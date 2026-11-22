@@ -1,0 +1,9 @@
+交付准备状态（2026-11-22）
+
+已准备：模型 ID 配置、SwanLab 本地基线记录链接、系统运行说明、项目说明、答辩 PPT、项目源码 ZIP、Harness 镜像 tar。
+
+镜像：rsi-harness:1.0.4，基于 python:3.12-alpine3.20，linux/amd64；docker save 归档 40,240,640 字节（约 38.4 MiB），SHA-256 8ec57f8066af2b9cdab7b616079719afa22663d515108dbc2e03c61d696c6ed5。
+
+已验证：容器内 describe 返回 workspace.v2；A/B/C 预测；模拟宿主完整训练协议（父 checkpoint 校验、白名单调参、候选上传、接受/回滚）；Harness 17 项、SDK 离线 18 项、A/C 各 9 项、B 核心 10 项测试通过。
+
+未完成：平台提交版本创建、真实平台试运行、完整云端 PyTRiO 实验记录。当前可核验的 A/B/C 实验均为公开数据上的本地 CPU NumPy 基线续训，不得描述为平台正式评分或 PyTRiO 微调结果。试运行额度仍为 0/10，正式评测 0/2。

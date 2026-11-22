@@ -1,0 +1,72 @@
+{
+  "method": "train-quantile PSI plus standardized mean difference",
+  "scope": "public inputs only; labels, IDs, and metadata are excluded",
+  "train_rows": 445,
+  "validation_rows": 1244,
+  "summary": {
+    "feature_count": 128,
+    "high_drift_features": 118,
+    "moderate_drift_features": 10,
+    "low_drift_features": 0,
+    "median_psi": 0.6733133064224679,
+    "max_psi": 2.730570229783862
+  },
+  "top_features": [
+    {
+      "feature_index": 78,
+      "feature_path": "[[\"key\",\"features\"],[\"index\",78]]",
+      "psi": 2.730570229783862,
+      "standardized_mean_difference": 0.2239300081812989,
+      "severity": "high"
+    },
+    {
+      "feature_index": 70,
+      "feature_path": "[[\"key\",\"features\"],[\"index\",70]]",
+      "psi": 2.6703210909461843,
+      "standardized_mean_difference": 0.15509022896516292,
+      "severity": "high"
+    },
+    {
+      "feature_index": 69,
+      "feature_path": "[[\"key\",\"features\"],[\"index\",69]]",
+      "psi": 2.667290551664886,
+      "standardized_mean_difference": 0.21787951685716145,
+      "severity": "high"
+    },
+    {
+      "feature_index": 5,
+      "feature_path": "[[\"key\",\"features\"],[\"index\",5]]",
+      "psi": 2.619231561715428,
+      "standardized_mean_difference": 0.0038097272191776324,
+      "severity": "high"
+    },
+    {
+      "feature_index": 13,
+      "feature_path": "[[\"key\",\"features\"],[\"index\",13]]",
+      "psi": 2.5516536973139567,
+      "standardized_mean_difference": 0.06421760440508478,
+      "severity": "high"
+    },
+    {
+      "feature_index": 77,
+      "feature_path": "[[\"key\",\"features\"],[\"index\",77]]",
+      "psi": 2.4124684531873304,
+      "standardized_mean_difference": 0.27919902648803224,
+      "severity": "high"
+    },
+    {
+      "feature_index": 0,
+      "feature_path": "[[\"key\",\"features\"],[\"index\",0]]",
+      "psi": 2.3254544823338326,
+      "standardized_mean_difference": 0.0005449553965751967,
+      "severity": "high"
+    },
+    {
+      "feature_index": 8,
+      "feature_path": "[[\"key\",\"features\"],[\"index\",8]]",
+      "psi": 2.2409866605884883,
+      "standardized_mean_difference": 0.026894465073579815,
+      "severity": "high"
+    }
+  ]
+}

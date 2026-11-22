@@ -1,0 +1,13 @@
+源代码与许可证声明
+
+本项目 Harness 适配器、诊断代码、配置与文档由参赛团队整理；未声明为第三方开源项目。
+
+比赛提供的 A/B/C CPU NumPy 训练包及 SDK 1.0.4 均来自赛事平台原始分发包。我们保留其原始压缩包与 SHA-256；压缩包中未发现独立 LICENSE/NOTICE 文件。其再分发和竞赛使用范围以组委会/平台规则为准。
+
+运行依赖：
+- Python 3.12：Python Software Foundation License。
+- NumPy 1.26.4：BSD 3-Clause License。
+- Alpine Linux 3.20 基础镜像：Alpine 各组件按其各自开源许可证分发；musl libc 为 MIT，BusyBox 为 GPLv2。
+- libstdc++/libgcc：GPLv3 及 GCC Runtime Library Exception。
+
+文档生成工具不属于 Harness 运行时依赖。项目包、镜像、SwanLab 记录和公开仓库不包含 PyTRiO API Key，也不包含隐藏测试数据或隐藏标签。

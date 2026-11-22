@@ -1,0 +1,72 @@
+{
+  "method": "train-quantile PSI plus standardized mean difference",
+  "scope": "public inputs only; labels, IDs, and metadata are excluded",
+  "train_rows": 7032,
+  "validation_rows": 1679,
+  "summary": {
+    "feature_count": 34,
+    "high_drift_features": 32,
+    "moderate_drift_features": 2,
+    "low_drift_features": 0,
+    "median_psi": 1.708349576684086,
+    "max_psi": 10.609776674921793
+  },
+  "top_features": [
+    {
+      "feature_index": 14,
+      "feature_path": "[[\"key\",\"features\"],[\"key\",\"horizontal\"],[\"key\",\"spectral_centroid\"]]",
+      "psi": 10.609776674921793,
+      "standardized_mean_difference": 1.4084791034111037,
+      "severity": "high"
+    },
+    {
+      "feature_index": 17,
+      "feature_path": "[[\"key\",\"features\"],[\"key\",\"vertical\"],[\"key\",\"band1_energy_0_2k\"]]",
+      "psi": 10.3376474793883,
+      "standardized_mean_difference": 0.11024754436885621,
+      "severity": "high"
+    },
+    {
+      "feature_index": 4,
+      "feature_path": "[[\"key\",\"features\"],[\"key\",\"horizontal\"],[\"key\",\"dominant_freq\"]]",
+      "psi": 8.759238451492134,
+      "standardized_mean_difference": 0.5267926672813389,
+      "severity": "high"
+    },
+    {
+      "feature_index": 31,
+      "feature_path": "[[\"key\",\"features\"],[\"key\",\"vertical\"],[\"key\",\"spectral_centroid\"]]",
+      "psi": 8.614330588366737,
+      "standardized_mean_difference": 1.0077101915776023,
+      "severity": "high"
+    },
+    {
+      "feature_index": 28,
+      "feature_path": "[[\"key\",\"features\"],[\"key\",\"vertical\"],[\"key\",\"rms\"]]",
+      "psi": 6.2323096355047545,
+      "standardized_mean_difference": 0.29335775582094215,
+      "severity": "high"
+    },
+    {
+      "feature_index": 33,
+      "feature_path": "[[\"key\",\"features\"],[\"key\",\"vertical\"],[\"key\",\"spectral_rms\"]]",
+      "psi": 6.213566466602866,
+      "standardized_mean_difference": 0.29320462274185566,
+      "severity": "high"
+    },
+    {
+      "feature_index": 25,
+      "feature_path": "[[\"key\",\"features\"],[\"key\",\"vertical\"],[\"key\",\"mean_abs\"]]",
+      "psi": 6.202698491433851,
+      "standardized_mean_difference": 0.2903006719497153,
+      "severity": "high"
+    },
+    {
+      "feature_index": 21,
+      "feature_path": "[[\"key\",\"features\"],[\"key\",\"vertical\"],[\"key\",\"dominant_freq\"]]",
+      "psi": 5.0661121526881825,
+      "standardized_mean_difference": 0.6847149383256962,
+      "severity": "high"
+    }
+  ]
+}

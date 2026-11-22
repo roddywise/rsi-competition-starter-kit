@@ -8,7 +8,7 @@
 
 为 A 气体分类、B 轴承分钟级 RUL、C 发动机循环级 RUL 构建一个统一的竞赛 Harness 镜像，接入智训引擎当前发布的 `contest_harness` SDK 1.0.4（协议 `contest.harness.workspace.v2`）。
 
-首版须能通过 SDK `describe`、离线训练协议、候选产物和预测验证。训练算法继续使用现有官方 CPU NumPy 基线；模型调用仅能选择经校验的超参数，不生成或执行任意代码。
+首版须能通过 SDK `describe`、离线训练协议、候选产物和预测验证。训练算法继续使用现有官方 CPU NumPy 基线；模型调用仅能选择经校验的超参数，不生成或执行任意代码。每轮对公开训练/验证输入增加无标签分布漂移诊断，供模型决策和实验记录使用。
 
 ## 已确认的平台约束
 
@@ -20,7 +20,7 @@
 - 续训必须使用 `rnd.parent.path()` 读取并校验本轮平台父检查点。模型调用由 `rnd.model()` 通过宿主完成，API Key 不进入镜像、仓库或训练记录。
 - SDK 1.0.4 压缩包 SHA-256 已校验为 `7afd282d6b5fd889d64d0515a67d169806970e36200689b18d2040026167a4af`。
 - 管理员公告写产物总量不超过 64 MiB；SDK 1.0.4 文档描述更大的分块上传上限。此材料存在不一致，首版候选额外限制在 64 MiB 内，并服从运行时 `rnd.limits`。
-- 当前机器未安装 Docker 或 Podman。可以完成 Python 离线验证，但不能在此机生成 `docker save` 镜像归档或发起平台试运行。
+- 本机 Docker Desktop 4.99 已可用；已构建并验证 `rsi-harness:1.0.4`（linux/amd64，Alpine 3.20），`docker save` 归档 40,240,640 字节。平台导入与试运行尚未执行。
 
 ## 方案
 
@@ -34,6 +34,7 @@ starter-kit/
     app/
       harness.py
       contest_submission.py
+      drift.py
       task_a/__init__.py
       task_b/__init__.py
       task_c/__init__.py
@@ -51,16 +52,17 @@ Docker 构建上下文使用 `starter-kit`，从现有任务目录将 `baselines
 1. `describe` 声明协议 `contest.harness.workspace.v2`，并声明 `classification` 与 `regression` 两类任务。
 2. `train(rnd)` 根据 `rnd.dataset_key` 选择 A、B 或 C 训练模块；同时校验 `rnd.task` 中的任务类型、主指标和方向。
 3. 从 `rnd.data` / `rnd.task["public_projection"]` 读取平台提供的公开训练与验证路径。梯度训练只使用训练集；验证集只作模型选择；不使用隐藏数据，也不把 `id` 或 `meta` 拼入特征。
-4. 读取 `rnd.history()`，只把历史中的主指标和白名单超参数发送给 `rnd.model()`；不把历史中的自由文本原因或代码送进提示。宿主已附加官方提示，选手消息不得重复粘贴官方提示。
-5. 模型只可从以下白名单选取 `epochs`、`learning_rate`、`batch_size`；首版不接受代码补丁、Shell 命令或路径：
+4. 用冻结的输入 schema 对公开训练/验证输入计算 PSI 与 standardized mean difference，生成 `drift_report.json`。漂移诊断只用于诊断和决策，不参与梯度训练；不读取答案、ID 或 meta。
+5. 读取 `rnd.history()`，向 `rnd.model()` 只发送历史主指标、白名单超参数和有限的漂移摘要；不把历史中的自由文本原因、代码或样本值送进提示。宿主已附加官方提示，选手消息不得重复粘贴官方提示。
+6. 模型只可从以下白名单选取 `epochs`、`learning_rate`、`batch_size`；首版不接受代码补丁、Shell 命令或路径：
    - A：epochs `{1, 2, 3}`；learning rate `{0.001, 0.003, 0.005}`；batch size `{64, 128, 256}`。
    - B：epochs `{1, 2, 3}`；learning rate `{0.001, 0.003, 0.005}`；batch size `{64, 128, 256}`。
    - C：epochs `{1, 2, 3}`；learning rate `{0.001, 0.002, 0.003}`；batch size `{128, 256, 512}`。
-6. 严格解析模型返回的 JSON。缺字段、字段超出白名单或响应无效时，改用任务配置中的基准学习率和 batch size，并执行 1 epoch；记录该回退，不执行响应中的任何代码或命令。
-7. 从本轮 `rnd.parent.descriptor["checkpoint_paths"]` 中读取唯一声明的检查点，经 `rnd.parent.path()` 校验摘要后，调用对应的 `train_run()` 续训。候选写入全新 `/workspace/candidate`，包含 `checkpoint.npz`、`training.json` 和 `history.jsonl`。优化器状态已保存在 checkpoint 中，首版不单独写 `/state`。
-8. 用 `rnd.submit_candidate()` 提交候选，并按 SDK/运行时限制检查文件数、摘要和字节数。只声明实际存在的 checkpoint；预测入口为 `["python3", "/app/harness.py", "predict"]`。
-9. 使用平台返回的验证摘要作为正式候选分数：A 的 Macro-F1 越高越好，B/C 的 RMSE 越低越好。相较父模型有严格改善时选择候选；未改善或候选摘要无效时选择父模型。首轮若平台没有提供父模型指标，但候选指标有效，则可选择该候选作为第一个已测量产物，并记录“无可比父指标”，不得宣称取得提升；若候选指标无效则选择父模型。`rnd.finish()` 引用实际读取的历史 ID 和本轮真实模型调用 ID。
-10. RPC 超时、中断或 `RPC_OUTCOME_UNKNOWN` 时立即停止本轮，不在同一会话重试，也不重复提交。
+7. 严格解析模型返回的 JSON。缺字段、字段超出白名单或响应无效时，改用任务配置中的基准学习率和 batch size，并执行 1 epoch；记录该回退，不执行响应中的任何代码或命令。
+8. 从本轮 `rnd.parent.descriptor["checkpoint_paths"]` 中读取唯一声明的检查点，经 `rnd.parent.path()` 校验摘要后，调用对应的 `train_run()` 续训。候选写入全新 `/workspace/candidate`，包含 `checkpoint.npz`、`training.json`、`history.jsonl` 和 `drift_report.json`。优化器状态已保存在 checkpoint 中，首版不单独写 `/state`。
+9. 用 `rnd.submit_candidate()` 提交候选，并按 SDK/运行时限制检查文件数、摘要和字节数。只声明实际存在的 checkpoint；预测入口为 `["python3", "/app/harness.py", "predict"]`。
+10. 使用平台返回的验证摘要作为正式候选分数：A 的 Macro-F1 越高越好，B/C 的 RMSE 越低越好。相较父模型有严格改善时选择候选；未改善或候选摘要无效时选择父模型。首轮若平台没有提供父模型指标，但候选指标有效，则可选择该候选作为第一个已测量产物，并记录“无可比父指标”，不得宣称取得提升；若候选指标无效则选择父模型。`rnd.finish()` 引用实际读取的历史 ID 和本轮真实模型调用 ID。
+11. RPC 超时、中断或 `RPC_OUTCOME_UNKNOWN` 时立即停止本轮，不在同一会话重试，也不重复提交。
 
 ## 预测流程
 
@@ -83,6 +85,7 @@ python3 -m unittest tests.test_sdk tests.test_contract_regressions tests.test_tr
 - 模型无效 JSON/超出白名单时确定性回退；父检查点摘要或任务不匹配时安全失败。
 - 平台摘要改善时选择候选；不改善或缺少有效指标时选择父检查点。
 - 首轮父模型没有可用指标时，只能记录为第一个已测量候选，不得记成“优于基线”。
+- 漂移报告和提交候选的前置诊断都只读取公开输入字段；报告不保存标签、ID 或 meta。
 - A/B/C 预测输出符合分类/回归协议；特征、类别或任务不匹配时拒绝预测。
 - 候选大小不超过 64 MiB；测试中不包含真实 API Key，也不连接 PyTrio。
 

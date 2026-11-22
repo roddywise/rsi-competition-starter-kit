@@ -1,0 +1,61 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+* { box-sizing: border-box; }
+html, body { width: 720pt; height: 405pt; margin: 0; padding: 0; }
+body {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #F4F7F8; color: #233541; font-family: Arial, sans-serif;
+}
+.page { width: 720pt; height: 405pt; padding: 24pt 32pt 20pt; display: flex; flex-direction: column; }
+.top { height: 18pt; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12pt; }
+.brand { color: #177E89; font-size: 9pt; font-weight: bold; margin: 0; }
+.page-no { color: #60727E; font-size: 8pt; margin: 0; }
+.title { color: #173247; font-size: 25pt; line-height: 1.1; margin: 0 0 5pt; }
+.subtitle { color: #60727E; font-size: 11pt; line-height: 1.2; margin: 0; }
+.content { flex: 1; display: flex; flex-direction: column; gap: 9pt; min-height: 0; }
+.footer { height: 13pt; margin-top: 7pt; border-top: 1px solid #E6EFF2; padding-top: 4pt; }
+.footer p { color: #60727E; font-size: 7pt; margin: 0; }
+.row { display: flex; gap: 10pt; }
+.card {
+  background: #FFFFFF; border-left: 4pt solid #177E89;
+  border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;
+}
+.card h3 { color: #173247; font-size: 13pt; line-height: 1.15; margin: 0; }
+.card p { color: #233541; font-size: 9pt; line-height: 1.25; margin: 0; }
+.card .big { color: #177E89; font-size: 22pt; line-height: 1; font-weight: bold; margin: 2pt 0; }
+.accent { border-left-color: #D97A34; }
+.tag { color: #D97A34; font-weight: bold; font-size: 8pt; margin: 0; }
+.small { color: #60727E; font-size: 8pt; line-height: 1.2; margin: 0; }
+.pill { background: #E6EFF2; border-radius: 4pt; padding: 5pt 7pt; }
+.flow { display: flex; align-items: stretch; gap: 7pt; }
+.flow-card { flex: 1; background: #FFFFFF; border-top: 4pt solid #177E89; padding: 9pt; display: flex; flex-direction: column; gap: 5pt; }
+.flow-card h3 { margin: 0; font-size: 11pt; color: #173247; }
+.flow-card p { margin: 0; font-size: 8.5pt; line-height: 1.2; }
+.arrow { width: 18pt; align-self: center; color: #D97A34; font-size: 16pt; font-weight: bold; }
+.listbox { background: #FFFFFF; padding: 10pt 13pt; border-radius: 6pt; }
+ul { margin: 0; padding-left: 17pt; }
+li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
+.matrix { display:flex; flex-direction:column; width:100%; background:#FFFFFF; border:1px solid #C9D5DB; }
+.mrow { display:flex; }
+.mcell { flex:1; padding:6pt 7pt; border-right:0.6pt solid #C9D5DB; border-bottom:0.6pt solid #C9D5DB; display:flex; align-items:center; }
+.mcell p { color:#233541; font-size:8pt; line-height:1.15; margin:0; }
+.mhead { background:#173247; }
+.mhead .mcell p { color:#FFFFFF; font-weight:bold; text-align:center; }
+.status { background: #FFF4E7; border-left: 5pt solid #D97A34; padding: 9pt 11pt; }
+.status p { margin: 0; color: #233541; font-size: 9pt; line-height: 1.25; }
+</style></head><body>
+    <div class="page">
+      <div class="top"><p class="brand">RSI · 智训引擎</p><p class="page-no">04 / 10</p></div>
+      <div><h1 class="title">受控进化：让模型提议，不让它越权</h1><p class="subtitle">首版把模型动作限制为可验证的超参数选择。</p></div>
+      <div class="content"><div class="row">
+          <div class="card" style="flex:1;"><p class="tag">输入</p><h3>最小上下文</h3><p>任务合同、最多 10 条历史主指标、白名单配置。</p><p class="small">不发送原始样本、答案、ID、meta 或历史自由文本。</p></div>
+          <div class="card accent" style="flex:1;"><p class="tag">动作</p><h3>严格 JSON</h3><p>epochs / learning_rate / batch_size。</p><p class="small">不接受代码、Shell、路径或额外字段；无效响应固定回退。</p></div>
+          <div class="card" style="flex:1;"><p class="tag">验证</p><h3>平台指标</h3><p>A Macro-F1 越高越好；B/C RMSE 越低越好。</p><p class="small">候选摘要无效或未严格改善时回滚。</p></div>
+        </div>
+        <div class="row">
+          <div class="listbox" style="flex:1;">
+            <h3 style="font-size:12pt;color:#173247;margin:0 0 5pt;">安全边界</h3>
+            <ul><li>父 checkpoint SHA-256 必须由 SDK 校验。</li><li>候选写到独立 /workspace，产物上限保守按 64 MiB。</li><li>API Key 只进平台密钥栏，不进镜像或源码。</li><li>RPC 状态不明时停轮，不自动重试。</li></ul>
+          </div>
+        </div></div>
+      <div class="footer"><p>公开数据本地开发参考 · 非平台正式评分</p></div>
+    </div></body></html>

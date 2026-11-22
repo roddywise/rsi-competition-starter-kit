@@ -1,0 +1,18 @@
+Harness 镜像清单（2026-11-22）
+
+文件：harness.tar
+镜像标签：rsi-harness:1.0.4
+平台：linux/amd64
+基础镜像：python:3.12-alpine3.20
+大小：40,240,640 字节（约 38.4 MiB）
+SHA-256：8ec57f8066af2b9cdab7b616079719afa22663d515108dbc2e03c61d696c6ed5
+导出方式：docker save
+
+容器内已验证：
+- python 3.12.16 / numpy 1.26.4
+- contest_harness SDK 1.0.4
+- describe 返回 contest.harness.workspace.v2 / host_gateway_rpc / classification+regression
+- A/B/C 预测各 1 条
+- 模拟宿主完整训练协议：父 checkpoint 校验、模型调用、候选上传（checkpoint.npz、training.json、history.jsonl、drift_report.json）、指标改善接受候选
+
+未执行：平台镜像导入/可用性确认、提交版本创建、试运行、正式评测。

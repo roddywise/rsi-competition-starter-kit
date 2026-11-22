@@ -1,0 +1,86 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+* { box-sizing: border-box; }
+html, body { width: 720pt; height: 405pt; margin: 0; padding: 0; }
+body {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #F4F7F8; color: #233541; font-family: Arial, sans-serif;
+}
+.page { width: 720pt; height: 405pt; padding: 24pt 32pt 20pt; display: flex; flex-direction: column; }
+.top { height: 18pt; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12pt; }
+.brand { color: #177E89; font-size: 9pt; font-weight: bold; margin: 0; }
+.page-no { color: #60727E; font-size: 8pt; margin: 0; }
+.title { color: #173247; font-size: 25pt; line-height: 1.1; margin: 0 0 5pt; }
+.subtitle { color: #60727E; font-size: 11pt; line-height: 1.2; margin: 0; }
+.content { flex: 1; display: flex; flex-direction: column; gap: 9pt; min-height: 0; }
+.footer { height: 13pt; margin-top: 7pt; border-top: 1px solid #E6EFF2; padding-top: 4pt; }
+.footer p { color: #60727E; font-size: 7pt; margin: 0; }
+.row { display: flex; gap: 10pt; }
+.card {
+  background: #FFFFFF; border-left: 4pt solid #177E89;
+  border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;
+}
+.card h3 { color: #173247; font-size: 13pt; line-height: 1.15; margin: 0; }
+.card p { color: #233541; font-size: 9pt; line-height: 1.25; margin: 0; }
+.card .big { color: #177E89; font-size: 22pt; line-height: 1; font-weight: bold; margin: 2pt 0; }
+.accent { border-left-color: #D97A34; }
+.tag { color: #D97A34; font-weight: bold; font-size: 8pt; margin: 0; }
+.small { color: #60727E; font-size: 8pt; line-height: 1.2; margin: 0; }
+.pill { background: #E6EFF2; border-radius: 4pt; padding: 5pt 7pt; }
+.flow { display: flex; align-items: stretch; gap: 7pt; }
+.flow-card { flex: 1; background: #FFFFFF; border-top: 4pt solid #177E89; padding: 9pt; display: flex; flex-direction: column; gap: 5pt; }
+.flow-card h3 { margin: 0; font-size: 11pt; color: #173247; }
+.flow-card p { margin: 0; font-size: 8.5pt; line-height: 1.2; }
+.arrow { width: 18pt; align-self: center; color: #D97A34; font-size: 16pt; font-weight: bold; }
+.listbox { background: #FFFFFF; padding: 10pt 13pt; border-radius: 6pt; }
+ul { margin: 0; padding-left: 17pt; }
+li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
+.matrix { display:flex; flex-direction:column; width:100%; background:#FFFFFF; border:1px solid #C9D5DB; }
+.mrow { display:flex; }
+.mcell { flex:1; padding:6pt 7pt; border-right:0.6pt solid #C9D5DB; border-bottom:0.6pt solid #C9D5DB; display:flex; align-items:center; }
+.mcell p { color:#233541; font-size:8pt; line-height:1.15; margin:0; }
+.mhead { background:#173247; }
+.mhead .mcell p { color:#FFFFFF; font-weight:bold; text-align:center; }
+.status { background: #FFF4E7; border-left: 5pt solid #D97A34; padding: 9pt 11pt; }
+.status p { margin: 0; color: #233541; font-size: 9pt; line-height: 1.25; }
+</style></head><body>
+    <div class="page">
+      <div class="top"><p class="brand">RSI · 智训引擎</p><p class="page-no">05 / 10</p></div>
+      <div><h1 class="title">第一轮本地结果：总体小幅改善，不能替代平台评分</h1><p class="subtitle">NumPy 1.26.4；每项从官方 checkpoint 续训 2 epochs；只用公开验证集。</p></div>
+      <div class="content"><div class="matrix">
+           <div class="mrow mhead">
+             <div class="mcell" style="flex:0.6;"><p>任务</p></div>
+             <div class="mcell" style="flex:1.4;"><p>训练前</p></div>
+             <div class="mcell" style="flex:1.4;"><p>训练后</p></div>
+             <div class="mcell" style="flex:1.3;"><p>变化</p></div>
+             <div class="mcell" style="flex:0.9;"><p>记录</p></div>
+           </div>
+           <div class="mrow">
+             <div class="mcell" style="flex:0.6;"><p>A</p></div>
+             <div class="mcell" style="flex:1.4;"><p>Macro-F1 0.7140<br>Acc 0.8786</p></div>
+             <div class="mcell" style="flex:1.4;"><p>Macro-F1 0.7166<br>Acc 0.8826</p></div>
+             <div class="mcell" style="flex:1.3;"><p>+0.0026 F1</p></div>
+             <div class="mcell" style="flex:0.9;"><p>A-round-01</p></div>
+           </div>
+           <div class="mrow">
+             <div class="mcell" style="flex:0.6;"><p>B</p></div>
+             <div class="mcell" style="flex:1.4;"><p>RMSE 681.16 分钟<br>MAE 563.11</p></div>
+             <div class="mcell" style="flex:1.4;"><p>RMSE 656.35 分钟<br>MAE 545.86</p></div>
+             <div class="mcell" style="flex:1.3;"><p>−24.81 分钟<br>−3.6%</p></div>
+             <div class="mcell" style="flex:0.9;"><p>B-round-01</p></div>
+           </div>
+           <div class="mrow">
+             <div class="mcell" style="flex:0.6;"><p>C</p></div>
+             <div class="mcell" style="flex:1.4;"><p>RMSE 52.87 cycles<br>MAE 38.90</p></div>
+             <div class="mcell" style="flex:1.4;"><p>RMSE 52.74 cycles<br>MAE 38.99</p></div>
+             <div class="mcell" style="flex:1.3;"><p>−0.13 RMSE<br>+0.09 MAE</p></div>
+             <div class="mcell" style="flex:0.9;"><p>C-round-01</p></div>
+           </div>
+         </div>
+         <div class="row">
+           <div class="card" style="flex:1;"><p class="tag">A</p><h3>Macro-F1</h3><p class="big">+0.0026</p><p class="small">0.7140 → 0.7166</p></div>
+           <div class="card accent" style="flex:1;"><p class="tag">B</p><h3>RMSE</h3><p class="big">−3.6%</p><p class="small">681.16 → 656.35 分钟</p></div>
+           <div class="card" style="flex:1;"><p class="tag">C</p><h3>RMSE / MAE</h3><p class="big">−0.13 / +0.09</p><p class="small">52.87 → 52.74 cycles；MAE 变差</p></div>
+         </div>
+         <p class="small">本页数字为本地开发报告值，字段 official_scoring_ready=false；不得称为官方成绩。</p></div>
+      <div class="footer"><p>公开数据本地开发参考 · 非平台正式评分</p></div>
+    </div></body></html>

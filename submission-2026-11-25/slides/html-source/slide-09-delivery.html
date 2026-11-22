@@ -1,0 +1,57 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+* { box-sizing: border-box; }
+html, body { width: 720pt; height: 405pt; margin: 0; padding: 0; }
+body {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #F4F7F8; color: #233541; font-family: Arial, sans-serif;
+}
+.page { width: 720pt; height: 405pt; padding: 24pt 32pt 20pt; display: flex; flex-direction: column; }
+.top { height: 18pt; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12pt; }
+.brand { color: #177E89; font-size: 9pt; font-weight: bold; margin: 0; }
+.page-no { color: #60727E; font-size: 8pt; margin: 0; }
+.title { color: #173247; font-size: 25pt; line-height: 1.1; margin: 0 0 5pt; }
+.subtitle { color: #60727E; font-size: 11pt; line-height: 1.2; margin: 0; }
+.content { flex: 1; display: flex; flex-direction: column; gap: 9pt; min-height: 0; }
+.footer { height: 13pt; margin-top: 7pt; border-top: 1px solid #E6EFF2; padding-top: 4pt; }
+.footer p { color: #60727E; font-size: 7pt; margin: 0; }
+.row { display: flex; gap: 10pt; }
+.card {
+  background: #FFFFFF; border-left: 4pt solid #177E89;
+  border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;
+}
+.card h3 { color: #173247; font-size: 13pt; line-height: 1.15; margin: 0; }
+.card p { color: #233541; font-size: 9pt; line-height: 1.25; margin: 0; }
+.card .big { color: #177E89; font-size: 22pt; line-height: 1; font-weight: bold; margin: 2pt 0; }
+.accent { border-left-color: #D97A34; }
+.tag { color: #D97A34; font-weight: bold; font-size: 8pt; margin: 0; }
+.small { color: #60727E; font-size: 8pt; line-height: 1.2; margin: 0; }
+.pill { background: #E6EFF2; border-radius: 4pt; padding: 5pt 7pt; }
+.flow { display: flex; align-items: stretch; gap: 7pt; }
+.flow-card { flex: 1; background: #FFFFFF; border-top: 4pt solid #177E89; padding: 9pt; display: flex; flex-direction: column; gap: 5pt; }
+.flow-card h3 { margin: 0; font-size: 11pt; color: #173247; }
+.flow-card p { margin: 0; font-size: 8.5pt; line-height: 1.2; }
+.arrow { width: 18pt; align-self: center; color: #D97A34; font-size: 16pt; font-weight: bold; }
+.listbox { background: #FFFFFF; padding: 10pt 13pt; border-radius: 6pt; }
+ul { margin: 0; padding-left: 17pt; }
+li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
+.matrix { display:flex; flex-direction:column; width:100%; background:#FFFFFF; border:1px solid #C9D5DB; }
+.mrow { display:flex; }
+.mcell { flex:1; padding:6pt 7pt; border-right:0.6pt solid #C9D5DB; border-bottom:0.6pt solid #C9D5DB; display:flex; align-items:center; }
+.mcell p { color:#233541; font-size:8pt; line-height:1.15; margin:0; }
+.mhead { background:#173247; }
+.mhead .mcell p { color:#FFFFFF; font-weight:bold; text-align:center; }
+.status { background: #FFF4E7; border-left: 5pt solid #D97A34; padding: 9pt 11pt; }
+.status p { margin: 0; color: #233541; font-size: 9pt; line-height: 1.25; }
+</style></head><body>
+    <div class="page">
+      <div class="top"><p class="brand">RSI · 智训引擎</p><p class="page-no">09 / 10</p></div>
+      <div><h1 class="title">交付边界与当前风险</h1><p class="subtitle">代码、容器协议和镜像已验收；平台版本尚未创建。</p></div>
+      <div class="content"><div class="row">
+          <div class="card" style="flex:1;"><p class="tag">已完成</p><h3>SDK 1.0.4 + 镜像</h3><p>describe/train/predict；单镜像 A/B/C；漂移报告、自动回滚；docker save 40.2 MB。</p><p class="small">Harness 17 项；SDK 官方离线 18 项；A/C 各9、B核心10项通过。</p></div>
+          <div class="card accent" style="flex:1;"><p class="tag">待执行</p><h3>平台提交与试运行</h3><p>尚未创建提交版本，尚未上传镜像或填写 PyTRiO Key。</p><p class="small">真实宿主兼容性、无人值守运行和费用需试运行验证。</p></div>
+        </div>
+        <div class="listbox"><h3 style="font-size:12pt;color:#173247;margin:0 0 5pt;">不能冒充已完成的事项</h3>
+          <ul><li>没有创建平台提交版本，也没有消耗任何试运行额度（0/10）。</li><li>正式评测保持 0/2，尚未启动。</li><li>三条 SwanLab 记录是本地公开数据续训，不是完整 PyTrio 微调/平台评测记录。</li><li>B 官方包的两项打包测试依赖缺失脚本，训练核心测试仍通过。</li></ul>
+        </div></div>
+      <div class="footer"><p>公开数据本地开发参考 · 非平台正式评分</p></div>
+    </div></body></html>

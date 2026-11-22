@@ -6,6 +6,8 @@ import math
 import os
 from pathlib import Path
 
+from drift import diagnose_public_drift
+
 
 TASKS = ("classification", "regression")
 
@@ -321,8 +323,28 @@ def train(rnd):
         raise ValueError("platform public data paths are missing")
 
     train_module = _load_task_module(dataset_key, "train")
+    data_module = _load_task_module(dataset_key, "data")
     config = _profile_config(dataset_key, train_module)
     history = list(rnd.history())
+    drift_report = diagnose_public_drift(
+        train_path,
+        validation_path,
+        flatten=data_module.flatten,
+    )
+    drift_for_model = {
+        "summary": drift_report["summary"],
+        "top_features": [
+            {
+                "feature_index": item["feature_index"],
+                "psi": item["psi"],
+                "standardized_mean_difference": item[
+                    "standardized_mean_difference"
+                ],
+                "severity": item["severity"],
+            }
+            for item in drift_report["top_features"]
+        ],
+    }
     prompt_payload = {
         "dataset_key": dataset_key,
         "task": expected_task,
@@ -331,6 +353,7 @@ def train(rnd):
         "recent_official_measurements": _history_for_model(
             history, metric, dataset_key
         ),
+        "public_input_drift": drift_for_model,
         "allowed_values": _ACTIONS[dataset_key],
         "response_schema": {
             "hypothesis": "short non-empty text",
@@ -387,6 +410,11 @@ def train(rnd):
         batch_size=action["batch_size"],
         stage_id=stage_id,
     )
+    with (candidate / "drift_report.json").open(
+        "x", encoding="utf-8"
+    ) as stream:
+        json.dump(drift_report, stream, ensure_ascii=False, allow_nan=False, indent=2)
+        stream.write("\n")
     _candidate_size(candidate, getattr(rnd, "limits", {}))
 
     hypothesis = action["hypothesis"]
@@ -405,6 +433,7 @@ def train(rnd):
         "epochs": action["epochs"],
         "model_action_fallback": action["model_action_fallback"],
         "parent_checkpoint_sha256": report.get("parent_checkpoint_sha256"),
+        "public_input_drift": drift_report["summary"],
     }
     submitted = rnd.submit_candidate(
         candidate,

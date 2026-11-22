@@ -14,6 +14,11 @@
 # Generated ZIP duplicates the starter-kit tree; keep it out of Git
 starter-kit-share.zip
 
+# Submission binaries stay local; docs and source are tracked
+/submission-2026-11-25/harness.tar
+/submission-2026-11-25/project_source.zip
+/submission-2026-11-25/slides/tmp/
+
 # Old planning drafts are not part of the team starter kit
 /01-路线图与任务看板.md
 /02-技术方案.md

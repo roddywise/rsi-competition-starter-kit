@@ -1,6 +1,6 @@
 # RSI Harness（SDK 1.0.4）
 
-此目录提供 A/B/C 共用的 `contest.harness.workspace.v2` Harness。它复用各任务现有 CPU NumPy 训练器，不修改官方训练包；每轮模型调用只能选择代码中白名单的 epoch、学习率和 batch size。
+此目录提供 A/B/C 共用的 `contest.harness.workspace.v2` Harness。它复用各任务现有 CPU NumPy 训练器，不修改官方训练包；每轮先对公开输入计算 PSI 与标准化均值差漂移摘要，再由模型从白名单选择 epoch、学习率和 batch size。候选含 `drift_report.json`，只保存特征路径与统计量，不含答案、ID 或 meta。
 
 本地离线验收不会调用 PyTRiO，也不需要 API Key。离线验收通过后，队长最多授权 3 次平台试运行；正式评测不在本阶段执行。
 
@@ -12,6 +12,8 @@
 
 SDK 1.0.4 归档位于 `vendor/contest-harness-sdk-1.0.4.tar.gz`，SHA-256 见 `vendor/SDK_SHA256.txt`。容器从本地已校验的 SDK 源码运行，不把 SDK 包下载交给比赛运行时。
 Docker 构建会从包索引安装锁定的 NumPy 1.26.4，因此构建机需要访问 Python 包索引；比赛容器运行时不访问外网。
+
+当前构建基线为 `python:3.12-alpine3.20`，镜像 `rsi-harness:1.0.4`，`docker save` 归档约 40.2 MB，低于提交页的 50 MB 门槛。
 
 ## 本地测试
 
@@ -67,7 +69,8 @@ docker save -o harness.tar rsi-harness:1.0.4
 
 ## 平台运行边界
 
-- 镜像导出前先完成上面的离线测试。此机当前没有 Docker/Podman，因此尚未构建或验证真实镜像。
+- 镜像导出前先完成上面的离线测试。本机已通过 Alpine/linux-amd64 镜像的 `describe`、A/B/C 预测和模拟宿主完整训练协议；`docker save` 归档约 40.2 MB。
 - 平台试运行会真实调用 PyTRiO，可能产生费用并消耗全队额度。使用前确认本次运行覆盖的任务和轮数；每次试运行完成后查看结果，再决定是否使用下一次，最多 3 次。
+- 平台提交版本尚未创建，试运行额度仍为 0/10；正式评测保持 0/2。
 - 不启动正式评测。PyTRiO Key 由队长在平台安全输入，不放进镜像、仓库、SwanLab 或聊天。
 - 管理员公告与 SDK 1.0.4 对产物上限的说明不一致；首版候选保守限制在 64 MiB，并同时遵守运行时 `rnd.limits`。

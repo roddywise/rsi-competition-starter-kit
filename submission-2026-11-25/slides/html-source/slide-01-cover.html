@@ -1,0 +1,66 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+* { box-sizing: border-box; }
+html, body { width: 720pt; height: 405pt; margin: 0; padding: 0; }
+body {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #F4F7F8; color: #233541; font-family: Arial, sans-serif;
+}
+.page { width: 720pt; height: 405pt; padding: 24pt 32pt 20pt; display: flex; flex-direction: column; }
+.top { height: 18pt; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12pt; }
+.brand { color: #177E89; font-size: 9pt; font-weight: bold; margin: 0; }
+.page-no { color: #60727E; font-size: 8pt; margin: 0; }
+.title { color: #173247; font-size: 25pt; line-height: 1.1; margin: 0 0 5pt; }
+.subtitle { color: #60727E; font-size: 11pt; line-height: 1.2; margin: 0; }
+.content { flex: 1; display: flex; flex-direction: column; gap: 9pt; min-height: 0; }
+.footer { height: 13pt; margin-top: 7pt; border-top: 1px solid #E6EFF2; padding-top: 4pt; }
+.footer p { color: #60727E; font-size: 7pt; margin: 0; }
+.row { display: flex; gap: 10pt; }
+.card {
+  background: #FFFFFF; border-left: 4pt solid #177E89;
+  border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;
+}
+.card h3 { color: #173247; font-size: 13pt; line-height: 1.15; margin: 0; }
+.card p { color: #233541; font-size: 9pt; line-height: 1.25; margin: 0; }
+.card .big { color: #177E89; font-size: 22pt; line-height: 1; font-weight: bold; margin: 2pt 0; }
+.accent { border-left-color: #D97A34; }
+.tag { color: #D97A34; font-weight: bold; font-size: 8pt; margin: 0; }
+.small { color: #60727E; font-size: 8pt; line-height: 1.2; margin: 0; }
+.pill { background: #E6EFF2; border-radius: 4pt; padding: 5pt 7pt; }
+.flow { display: flex; align-items: stretch; gap: 7pt; }
+.flow-card { flex: 1; background: #FFFFFF; border-top: 4pt solid #177E89; padding: 9pt; display: flex; flex-direction: column; gap: 5pt; }
+.flow-card h3 { margin: 0; font-size: 11pt; color: #173247; }
+.flow-card p { margin: 0; font-size: 8.5pt; line-height: 1.2; }
+.arrow { width: 18pt; align-self: center; color: #D97A34; font-size: 16pt; font-weight: bold; }
+.listbox { background: #FFFFFF; padding: 10pt 13pt; border-radius: 6pt; }
+ul { margin: 0; padding-left: 17pt; }
+li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
+.matrix { display:flex; flex-direction:column; width:100%; background:#FFFFFF; border:1px solid #C9D5DB; }
+.mrow { display:flex; }
+.mcell { flex:1; padding:6pt 7pt; border-right:0.6pt solid #C9D5DB; border-bottom:0.6pt solid #C9D5DB; display:flex; align-items:center; }
+.mcell p { color:#233541; font-size:8pt; line-height:1.15; margin:0; }
+.mhead { background:#173247; }
+.mhead .mcell p { color:#FFFFFF; font-weight:bold; text-align:center; }
+.status { background: #FFF4E7; border-left: 5pt solid #D97A34; padding: 9pt 11pt; }
+.status p { margin: 0; color: #233541; font-size: 9pt; line-height: 1.25; }
+
+      body { background: #173247; color: #FFFFFF; }
+      .page { padding: 30pt 36pt; justify-content: space-between; }
+      .brand, .page-no { color: #A9D4D8; }
+      .cover { display:flex; flex-direction:column; justify-content:center; flex:1; gap:13pt; border-left:7pt solid #D97A34; padding-left:24pt; }
+      .cover h1 { color:#FFFFFF; font-size:38pt; line-height:1.05; margin:0; }
+      .cover h2 { color:#B9DCE0; font-size:19pt; line-height:1.2; margin:0; }
+      .cover p { color:#EAF2F5; font-size:11pt; line-height:1.3; margin:0; }
+      .cover .tag { color:#FFC27E; font-size:10pt; }
+      .footer { border-top-color:#355469; } .footer p { color:#A9D4D8; }
+      </style></head><body><div class="page">
+      <div class="top"><p class="brand">RSI · 工业模型自进化</p><p class="page-no">01 / 10</p></div>
+      <div class="cover">
+        <p class="tag">工业制造场景 · 受控自进化系统</p>
+        <h1>智训引擎</h1>
+        <h2>工业模型训练与受控超参数优化</h2>
+        <p>统一接入 A 气体识别、B 轴承剩余寿命、C 发动机剩余寿命。</p>
+        <p><b>开发验证稿 · 2026-11-22</b></p>
+        <p>镜像已构建并通过容器测试；平台提交与试运行待完成。</p>
+      </div>
+      <div class="footer"><p>实验分数仅为本地开发参考，不是平台正式成绩</p></div>
+      </div></body></html>

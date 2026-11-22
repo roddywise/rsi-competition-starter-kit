@@ -183,13 +183,18 @@ class SubmissionTests(unittest.TestCase):
         dockerfile = (
             STARTER_KIT / "harness" / "Dockerfile"
         ).read_text(encoding="utf-8")
-        self.assertIn("FROM python:3.12-slim-bookworm", dockerfile)
+        self.assertIn("FROM python:3.12-alpine3.20", dockerfile)
+        self.assertIn("apk add --no-cache libstdc++", dockerfile)
         self.assertIn("numpy==1.26.4", dockerfile)
         self.assertIn("RSI_TASKS_ROOT=/app/tasks", dockerfile)
         self.assertIn("USER 65534:65534", dockerfile)
         self.assertIn(
             'ENTRYPOINT ["python3", "/app/harness.py"]', dockerfile
         )
+        self.assertIn(
+            "COPY harness/app/drift.py /app/drift.py", dockerfile
+        )
+        self.assertIn("mkdir -p /workspace", dockerfile)
         self.assertNotIn("PYTRIO_API_KEY", dockerfile)
 
     def test_sdk_describe_reports_workspace_v2_and_supported_tasks(self):
@@ -254,6 +259,89 @@ class SubmissionTests(unittest.TestCase):
                 round_.finished["model_call_ids"], ["model-call-a"]
             )
 
+    def test_train_records_public_input_drift_for_candidate_and_model(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            round_ = FakeRound("A", temporary)
+            with patch.dict(os.environ, {"CONTEST_WORK": temporary}, clear=False):
+                contest_submission.train(round_)
+
+            files = set(round_.submission["files"])
+            self.assertIn("drift_report.json", files)
+            drift = json.loads(
+                (round_.submission["directory"] / "drift_report.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(drift["summary"]["feature_count"], 128)
+            prompt = round_.model_messages[0]["content"]
+            self.assertIn("public_input_drift", prompt)
+
+    def test_public_drift_flags_shift_using_inputs_only(self):
+        from drift import diagnose_public_drift
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            train = root / "train.jsonl"
+            validation = root / "validation.jsonl"
+            train.write_text(
+                "".join(
+                    json.dumps(
+                        {
+                            "id": f"train-{i}",
+                            "inputs": {"sensor": i / 10, "constant": 1},
+                            "answer": f"private-label-{i}",
+                            "meta": {"secret": "must not be reported"},
+                        }
+                    )
+                    + "\n"
+                    for i in range(20)
+                ),
+                encoding="utf-8",
+            )
+            validation.write_text(
+                "".join(
+                    json.dumps(
+                        {
+                            "id": f"validation-{i}",
+                            "inputs": {"sensor": 10 + i / 10, "constant": 1},
+                            "answer": f"other-label-{i}",
+                            "meta": {"secret": "must not be reported"},
+                        }
+                    )
+                    + "\n"
+                    for i in range(20)
+                ),
+                encoding="utf-8",
+            )
+
+            report = diagnose_public_drift(train, validation)
+            encoded = json.dumps(report, ensure_ascii=False)
+
+            self.assertEqual(report["summary"]["feature_count"], 2)
+            self.assertGreaterEqual(report["summary"]["high_drift_features"], 1)
+            self.assertNotIn("private-label", encoded)
+            self.assertNotIn("other-label", encoded)
+            self.assertNotIn("must not be reported", encoded)
+
+    def test_public_drift_rejects_feature_schema_mismatch(self):
+        from drift import diagnose_public_drift
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            train = root / "train.jsonl"
+            validation = root / "validation.jsonl"
+            train.write_text(
+                '{"id":"t","inputs":{"x":1},"answer":"normal"}\n',
+                encoding="utf-8",
+            )
+            validation.write_text(
+                '{"id":"v","inputs":{"y":1},"answer":"normal"}\n',
+                encoding="utf-8",
+            )
+
+            with self.assertRaises(ValueError):
+                diagnose_public_drift(train, validation)
+
     def test_train_rolls_back_when_platform_metric_does_not_improve(self):
         with tempfile.TemporaryDirectory() as temporary:
             round_ = FakeRound(
@@ -286,7 +374,12 @@ class SubmissionTests(unittest.TestCase):
             )
             self.assertEqual(
                 set(round_.submission["files"]),
-                {"checkpoint.npz", "history.jsonl", "training.json"},
+                {
+                    "checkpoint.npz",
+                    "drift_report.json",
+                    "history.jsonl",
+                    "training.json",
+                },
             )
             total = sum(
                 path.stat().st_size

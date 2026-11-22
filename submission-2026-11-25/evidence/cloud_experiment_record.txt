@@ -1,0 +1,5 @@
+记录范围：A/B/C 公开数据、本地 CPU NumPy 基线各续训 2 epoch；不是 PyTRiO 训练、平台试运行或正式评分。
+SwanLab 项目：https://swanlab.cn/@roddywise/rsi-industrial-evolution
+A-round-01：https://swanlab.cn/@roddywise/rsi-industrial-evolution/runs/hwyfh2f0
+B-round-01：https://swanlab.cn/@roddywise/rsi-industrial-evolution/runs/fuk0smsu
+C-round-01：https://swanlab.cn/@roddywise/rsi-industrial-evolution/runs/hqrtkdua

@@ -1,0 +1,65 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+* { box-sizing: border-box; }
+html, body { width: 720pt; height: 405pt; margin: 0; padding: 0; }
+body {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #F4F7F8; color: #233541; font-family: Arial, sans-serif;
+}
+.page { width: 720pt; height: 405pt; padding: 24pt 32pt 20pt; display: flex; flex-direction: column; }
+.top { height: 18pt; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12pt; }
+.brand { color: #177E89; font-size: 9pt; font-weight: bold; margin: 0; }
+.page-no { color: #60727E; font-size: 8pt; margin: 0; }
+.title { color: #173247; font-size: 25pt; line-height: 1.1; margin: 0 0 5pt; }
+.subtitle { color: #60727E; font-size: 11pt; line-height: 1.2; margin: 0; }
+.content { flex: 1; display: flex; flex-direction: column; gap: 9pt; min-height: 0; }
+.footer { height: 13pt; margin-top: 7pt; border-top: 1px solid #E6EFF2; padding-top: 4pt; }
+.footer p { color: #60727E; font-size: 7pt; margin: 0; }
+.row { display: flex; gap: 10pt; }
+.card {
+  background: #FFFFFF; border-left: 4pt solid #177E89;
+  border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;
+}
+.card h3 { color: #173247; font-size: 13pt; line-height: 1.15; margin: 0; }
+.card p { color: #233541; font-size: 9pt; line-height: 1.25; margin: 0; }
+.card .big { color: #177E89; font-size: 22pt; line-height: 1; font-weight: bold; margin: 2pt 0; }
+.accent { border-left-color: #D97A34; }
+.tag { color: #D97A34; font-weight: bold; font-size: 8pt; margin: 0; }
+.small { color: #60727E; font-size: 8pt; line-height: 1.2; margin: 0; }
+.pill { background: #E6EFF2; border-radius: 4pt; padding: 5pt 7pt; }
+.flow { display: flex; align-items: stretch; gap: 7pt; }
+.flow-card { flex: 1; background: #FFFFFF; border-top: 4pt solid #177E89; padding: 9pt; display: flex; flex-direction: column; gap: 5pt; }
+.flow-card h3 { margin: 0; font-size: 11pt; color: #173247; }
+.flow-card p { margin: 0; font-size: 8.5pt; line-height: 1.2; }
+.arrow { width: 18pt; align-self: center; color: #D97A34; font-size: 16pt; font-weight: bold; }
+.listbox { background: #FFFFFF; padding: 10pt 13pt; border-radius: 6pt; }
+ul { margin: 0; padding-left: 17pt; }
+li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
+.matrix { display:flex; flex-direction:column; width:100%; background:#FFFFFF; border:1px solid #C9D5DB; }
+.mrow { display:flex; }
+.mcell { flex:1; padding:6pt 7pt; border-right:0.6pt solid #C9D5DB; border-bottom:0.6pt solid #C9D5DB; display:flex; align-items:center; }
+.mcell p { color:#233541; font-size:8pt; line-height:1.15; margin:0; }
+.mhead { background:#173247; }
+.mhead .mcell p { color:#FFFFFF; font-weight:bold; text-align:center; }
+.status { background: #FFF4E7; border-left: 5pt solid #D97A34; padding: 9pt 11pt; }
+.status p { margin: 0; color: #233541; font-size: 9pt; line-height: 1.25; }
+</style></head><body>
+    <div class="page">
+      <div class="top"><p class="brand">RSI · 智训引擎</p><p class="page-no">02 / 10</p></div>
+      <div><h1 class="title">三项工业任务，一套进化闭环</h1><p class="subtitle">工业模型从官方 CPU checkpoint 续训；评分对象是续训后的工业模型。</p></div>
+      <div class="content"><div class="row" style="flex:1;">
+          <div class="card" style="flex:1;">
+            <p class="tag">A · 分类</p><h3>气体识别</h3><p class="big">6 类</p>
+            <p>128 维传感器输入</p><p><b>Macro-F1 ↑</b></p><p class="small">验证批次与训练批次隔离，重点应对传感器漂移。</p>
+          </div>
+          <div class="card accent" style="flex:1;">
+            <p class="tag">B · 回归</p><h3>轴承剩余寿命</h3><p class="big">分钟</p>
+            <p>34 维双通道振动特征</p><p><b>RMSE / MAE ↓</b></p><p class="small">不使用健康等级伪标签；按整根轴承划分。</p>
+          </div>
+          <div class="card" style="flex:1;">
+            <p class="tag">C · 回归</p><h3>发动机剩余寿命</h3><p class="big">循环</p>
+            <p>24 维设置与传感器输入</p><p><b>RMSE ↓</b></p><p class="small">平台另报告 NASA 非对称分，寿命高估惩罚更大。</p>
+          </div>
+        </div>
+        <div class="status"><p>每任务 10 轮优化与全队试运行额度是两件事；平台评测尚未由本队启动。</p></div></div>
+      <div class="footer"><p>公开数据本地开发参考 · 非平台正式评分</p></div>
+    </div></body></html>

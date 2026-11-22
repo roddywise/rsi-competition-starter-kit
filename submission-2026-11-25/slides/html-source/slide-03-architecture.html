@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+* { box-sizing: border-box; }
+html, body { width: 720pt; height: 405pt; margin: 0; padding: 0; }
+body {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #F4F7F8; color: #233541; font-family: Arial, sans-serif;
+}
+.page { width: 720pt; height: 405pt; padding: 24pt 32pt 20pt; display: flex; flex-direction: column; }
+.top { height: 18pt; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12pt; }
+.brand { color: #177E89; font-size: 9pt; font-weight: bold; margin: 0; }
+.page-no { color: #60727E; font-size: 8pt; margin: 0; }
+.title { color: #173247; font-size: 25pt; line-height: 1.1; margin: 0 0 5pt; }
+.subtitle { color: #60727E; font-size: 11pt; line-height: 1.2; margin: 0; }
+.content { flex: 1; display: flex; flex-direction: column; gap: 9pt; min-height: 0; }
+.footer { height: 13pt; margin-top: 7pt; border-top: 1px solid #E6EFF2; padding-top: 4pt; }
+.footer p { color: #60727E; font-size: 7pt; margin: 0; }
+.row { display: flex; gap: 10pt; }
+.card {
+  background: #FFFFFF; border-left: 4pt solid #177E89;
+  border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;
+}
+.card h3 { color: #173247; font-size: 13pt; line-height: 1.15; margin: 0; }
+.card p { color: #233541; font-size: 9pt; line-height: 1.25; margin: 0; }
+.card .big { color: #177E89; font-size: 22pt; line-height: 1; font-weight: bold; margin: 2pt 0; }
+.accent { border-left-color: #D97A34; }
+.tag { color: #D97A34; font-weight: bold; font-size: 8pt; margin: 0; }
+.small { color: #60727E; font-size: 8pt; line-height: 1.2; margin: 0; }
+.pill { background: #E6EFF2; border-radius: 4pt; padding: 5pt 7pt; }
+.flow { display: flex; align-items: stretch; gap: 7pt; }
+.flow-card { flex: 1; background: #FFFFFF; border-top: 4pt solid #177E89; padding: 9pt; display: flex; flex-direction: column; gap: 5pt; }
+.flow-card h3 { margin: 0; font-size: 11pt; color: #173247; }
+.flow-card p { margin: 0; font-size: 8.5pt; line-height: 1.2; }
+.arrow { width: 18pt; align-self: center; color: #D97A34; font-size: 16pt; font-weight: bold; }
+.listbox { background: #FFFFFF; padding: 10pt 13pt; border-radius: 6pt; }
+ul { margin: 0; padding-left: 17pt; }
+li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
+.matrix { display:flex; flex-direction:column; width:100%; background:#FFFFFF; border:1px solid #C9D5DB; }
+.mrow { display:flex; }
+.mcell { flex:1; padding:6pt 7pt; border-right:0.6pt solid #C9D5DB; border-bottom:0.6pt solid #C9D5DB; display:flex; align-items:center; }
+.mcell p { color:#233541; font-size:8pt; line-height:1.15; margin:0; }
+.mhead { background:#173247; }
+.mhead .mcell p { color:#FFFFFF; font-weight:bold; text-align:center; }
+.status { background: #FFF4E7; border-left: 5pt solid #D97A34; padding: 9pt 11pt; }
+.status p { margin: 0; color: #233541; font-size: 9pt; line-height: 1.25; }
+</style></head><body>
+    <div class="page">
+      <div class="top"><p class="brand">RSI · 智训引擎</p><p class="page-no">03 / 10</p></div>
+      <div><h1 class="title">从父 checkpoint 到可审计候选</h1><p class="subtitle">单一镜像以 SDK 1.0.4 的 workspace.v2 协议支持分类与回归。</p></div>
+      <div class="content"><div class="flow" style="flex:1;align-items:center;">
+          <div class="flow-card"><h3>01 公开输入</h3><p>/data/train.jsonl</p><p>/data/validation.jsonl</p><p class="small">只读；隐藏标签不可见</p></div>
+          <p class="arrow">→</p>
+          <div class="flow-card"><h3>02 历史与提示</h3><p>rnd.history()</p><p>rnd.model()</p><p class="small">只传历史指标、白名单参数与漂移摘要</p></div>
+          <p class="arrow">→</p>
+          <div class="flow-card"><h3>03 CPU 续训</h3><p>rnd.parent.path()</p><p>NumPy MLP + Adam</p><p class="small">每轮输出新 checkpoint</p></div>
+        </div>
+        <div class="flow">
+          <div class="flow-card"><h3>04 候选与证据</h3><p>checkpoint.npz</p><p>training/history + drift_report</p></div>
+          <p class="arrow">→</p>
+          <div class="flow-card"><h3>05 平台测量</h3><p>平台公开验证摘要</p><p>官方指标为唯一决策依据</p></div>
+          <p class="arrow">→</p>
+          <div class="flow-card"><h3>06 接受或回滚</h3><p>严格改善才接受</p><p>否则保留父模型</p></div>
+        </div></div>
+      <div class="footer"><p>公开数据本地开发参考 · 非平台正式评分</p></div>
+    </div></body></html>

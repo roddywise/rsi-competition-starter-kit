@@ -1,0 +1,74 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+* { box-sizing: border-box; }
+html, body { width: 720pt; height: 405pt; margin: 0; padding: 0; }
+body {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #F4F7F8; color: #233541; font-family: Arial, sans-serif;
+}
+.page { width: 720pt; height: 405pt; padding: 24pt 32pt 20pt; display: flex; flex-direction: column; }
+.top { height: 18pt; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12pt; }
+.brand { color: #177E89; font-size: 9pt; font-weight: bold; margin: 0; }
+.page-no { color: #60727E; font-size: 8pt; margin: 0; }
+.title { color: #173247; font-size: 25pt; line-height: 1.1; margin: 0 0 5pt; }
+.subtitle { color: #60727E; font-size: 11pt; line-height: 1.2; margin: 0; }
+.content { flex: 1; display: flex; flex-direction: column; gap: 9pt; min-height: 0; }
+.footer { height: 13pt; margin-top: 7pt; border-top: 1px solid #E6EFF2; padding-top: 4pt; }
+.footer p { color: #60727E; font-size: 7pt; margin: 0; }
+.row { display: flex; gap: 10pt; }
+.card {
+  background: #FFFFFF; border-left: 4pt solid #177E89;
+  border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;
+}
+.card h3 { color: #173247; font-size: 13pt; line-height: 1.15; margin: 0; }
+.card p { color: #233541; font-size: 9pt; line-height: 1.25; margin: 0; }
+.card .big { color: #177E89; font-size: 22pt; line-height: 1; font-weight: bold; margin: 2pt 0; }
+.accent { border-left-color: #D97A34; }
+.tag { color: #D97A34; font-weight: bold; font-size: 8pt; margin: 0; }
+.small { color: #60727E; font-size: 8pt; line-height: 1.2; margin: 0; }
+.pill { background: #E6EFF2; border-radius: 4pt; padding: 5pt 7pt; }
+.flow { display: flex; align-items: stretch; gap: 7pt; }
+.flow-card { flex: 1; background: #FFFFFF; border-top: 4pt solid #177E89; padding: 9pt; display: flex; flex-direction: column; gap: 5pt; }
+.flow-card h3 { margin: 0; font-size: 11pt; color: #173247; }
+.flow-card p { margin: 0; font-size: 8.5pt; line-height: 1.2; }
+.arrow { width: 18pt; align-self: center; color: #D97A34; font-size: 16pt; font-weight: bold; }
+.listbox { background: #FFFFFF; padding: 10pt 13pt; border-radius: 6pt; }
+ul { margin: 0; padding-left: 17pt; }
+li { margin: 0 0 4pt; color: #233541; font-size: 9pt; line-height: 1.25; }
+.matrix { display:flex; flex-direction:column; width:100%; background:#FFFFFF; border:1px solid #C9D5DB; }
+.mrow { display:flex; }
+.mcell { flex:1; padding:6pt 7pt; border-right:0.6pt solid #C9D5DB; border-bottom:0.6pt solid #C9D5DB; display:flex; align-items:center; }
+.mcell p { color:#233541; font-size:8pt; line-height:1.15; margin:0; }
+.mhead { background:#173247; }
+.mhead .mcell p { color:#FFFFFF; font-weight:bold; text-align:center; }
+.status { background: #FFF4E7; border-left: 5pt solid #D97A34; padding: 9pt 11pt; }
+.status p { margin: 0; color: #233541; font-size: 9pt; line-height: 1.25; }
+</style></head><body>
+    <div class="page">
+      <div class="top"><p class="brand">RSI · 智训引擎</p><p class="page-no">07 / 10</p></div>
+      <div><h1 class="title">漂移诊断：A/B 的公开 split 差异明显</h1><p class="subtitle">每轮仅比较公开训练/验证 inputs，使用 PSI + 标准化均值差，不读取标签或 meta。</p></div>
+      <div class="content"><div class="matrix">
+           <div class="mrow mhead">
+             <div class="mcell"><p>任务</p></div><div class="mcell"><p>特征数</p></div><div class="mcell"><p>高漂移</p></div>
+             <div class="mcell"><p>中漂移</p></div><div class="mcell"><p>Median PSI</p></div><div class="mcell"><p>最大 PSI</p></div>
+           </div>
+           <div class="mrow">
+             <div class="mcell"><p>A</p></div><div class="mcell"><p>128</p></div><div class="mcell"><p>118</p></div>
+             <div class="mcell"><p>10</p></div><div class="mcell"><p>0.6733</p></div><div class="mcell"><p>2.7306</p></div>
+           </div>
+           <div class="mrow">
+             <div class="mcell"><p>B</p></div><div class="mcell"><p>34</p></div><div class="mcell"><p>32</p></div>
+             <div class="mcell"><p>2</p></div><div class="mcell"><p>1.7083</p></div><div class="mcell"><p>10.6098</p></div>
+           </div>
+           <div class="mrow">
+             <div class="mcell"><p>C</p></div><div class="mcell"><p>24</p></div><div class="mcell"><p>0</p></div>
+             <div class="mcell"><p>0</p></div><div class="mcell"><p>0.0039</p></div><div class="mcell"><p>0.0094</p></div>
+           </div>
+         </div>
+         <div class="row">
+           <div class="card" style="flex:1;"><p class="tag">方法</p><h3>训练分位数分箱 PSI</h3><p>10 个训练分位边界；1e-6 平滑。</p></div>
+           <div class="card accent" style="flex:1;"><p class="tag">A/B</p><h3>公开输入漂移</h3><p>A 118/128、B 32/34 特征达到高漂移阈值。</p></div>
+           <div class="card" style="flex:1;"><p class="tag">解释边界</p><h3>不是隐藏集结论</h3><p>仅诊断公开 train/validation split，不外推隐藏集或线上数据。</p></div>
+         </div>
+         <p class="small">阈值属于项目诊断规则：高 PSI≥0.25 或 SMD≥1.0；不是官方评分公式。</p></div>
+      <div class="footer"><p>公开数据本地开发参考 · 非平台正式评分</p></div>
+    </div></body></html>

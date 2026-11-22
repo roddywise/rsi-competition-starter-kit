@@ -1,0 +1,72 @@
+{
+  "method": "train-quantile PSI plus standardized mean difference",
+  "scope": "public inputs only; labels, IDs, and metadata are excluded",
+  "train_rows": 113089,
+  "validation_rows": 23049,
+  "summary": {
+    "feature_count": 24,
+    "high_drift_features": 0,
+    "moderate_drift_features": 0,
+    "low_drift_features": 24,
+    "median_psi": 0.0038541971766944583,
+    "max_psi": 0.00942659074116822
+  },
+  "top_features": [
+    {
+      "feature_index": 7,
+      "feature_path": "[[\"key\",\"sensors\"],[\"index\",7]]",
+      "psi": 0.00942659074116822,
+      "standardized_mean_difference": 0.01801268096925481,
+      "severity": "low"
+    },
+    {
+      "feature_index": 3,
+      "feature_path": "[[\"key\",\"sensors\"],[\"index\",3]]",
+      "psi": 0.008496806302311413,
+      "standardized_mean_difference": 0.030501900522205923,
+      "severity": "low"
+    },
+    {
+      "feature_index": 14,
+      "feature_path": "[[\"key\",\"sensors\"],[\"index\",14]]",
+      "psi": 0.0077809394051802094,
+      "standardized_mean_difference": 0.018168966181821733,
+      "severity": "low"
+    },
+    {
+      "feature_index": 12,
+      "feature_path": "[[\"key\",\"sensors\"],[\"index\",12]]",
+      "psi": 0.007771156024036737,
+      "standardized_mean_difference": 0.00913149825150158,
+      "severity": "low"
+    },
+    {
+      "feature_index": 10,
+      "feature_path": "[[\"key\",\"sensors\"],[\"index\",10]]",
+      "psi": 0.007646441299534768,
+      "standardized_mean_difference": 0.03086806067108308,
+      "severity": "low"
+    },
+    {
+      "feature_index": 11,
+      "feature_path": "[[\"key\",\"sensors\"],[\"index\",11]]",
+      "psi": 0.006892959811695845,
+      "standardized_mean_difference": 0.023943292775317364,
+      "severity": "low"
+    },
+    {
+      "feature_index": 16,
+      "feature_path": "[[\"key\",\"sensors\"],[\"index\",16]]",
+      "psi": 0.002380395381581823,
+      "standardized_mean_difference": 0.027398222069700613,
+      "severity": "low"
+    },
+    {
+      "feature_index": 2,
+      "feature_path": "[[\"key\",\"sensors\"],[\"index\",2]]",
+      "psi": 0.0030112903475921606,
+      "standardized_mean_difference": 0.027299605036178905,
+      "severity": "low"
+    }
+  ]
+}

@@ -48,4 +48,4 @@ CS同学3：打开 tasks\C-engine，阅读该目录的 OPENCODE_PROMPT.txt，负
 - B 压缩包自带的完整测试中有两个打包测试引用了包内缺失的 scripts/package_baselines.py。B 的 RUN_TESTS.cmd 只运行其余现有核心测试；RUN_FULL_TESTS.cmd 用于复现并报告组委会包缺文件问题。不要自行修改官方测试或伪造缺失模块。
 - PyTRiO API Key 不要放在代码、SwanLab配置文件、公开仓库或队群消息里。
 
-平台提交前要准备镜像、源码链接、模型调用信息、SwanLab记录链接和作品文档。当前 Harness 仍须先完成本地 SDK 离线验收；没有 Docker 环境时不要上传镜像。平台试运行与正式评测额度分开，API Key 只在平台密钥栏填写。
+平台提交前要准备镜像、源码链接、模型调用信息、SwanLab记录链接和作品文档。Harness 镜像已完成本地 SDK 离线验收、容器预测与模拟宿主训练验证；上传镜像前仍要确认平台显示“镜像可用”。平台试运行与正式评测额度分开，API Key 只在平台密钥栏填写。
